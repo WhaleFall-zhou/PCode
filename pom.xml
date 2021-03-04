@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>application</module>
-        <module>base</module>
+        <module>base-message</module>
     </modules>
     <groupId>com.PCode</groupId>
     <artifactId>pcode</artifactId>
