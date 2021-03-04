@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="21px" height="20px" viewBox="0 0 21 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Agile </title>
+    <defs>
+        <linearGradient x1="74.4264006%" y1="50%" x2="6.64449012%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CBDCFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="72.1842505%" y1="50%" x2="5.33980023%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CBDCFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="92.1627658%" y1="50%" x2="18.0451155%" y2="50%" id="linearGradient-3">
+            <stop stop-color="#FEFEFF" offset="0%"></stop>
+            <stop stop-color="#CBDCFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="74.7349736%" y1="62.5579607%" x2="0%" y2="62.5579607%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#CBDCFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Agile-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, 0.000000)">
+        <g id="编组-2">
+            <rect id="矩形" fill="#6698FF" x="0" y="0" width="20" height="20" rx="2.5"></rect>
+            <g id="编组" transform="translate(3.543307, 3.937008)">
+                <path d="M7.71653543,7.70087991 L9.9074955,11.4916792 C10.1560779,11.9214556 10.6561053,12.1620732 11.217682,12.1215732 L11.217682,12.1215732 L12.9133858,12.0010262 L9.71712244,6.53543307 L7.71653543,7.70087991 Z" id="Fill-6" fill="url(#linearGradient-1)"></path>
+                <path d="M7.76969209,6.44138895 L5.51181102,10.2268556 L7.49078296,11.4173228 L8.69479614,9.39920191 L8.69527128,9.40015542 C8.69527128,9.40015542 8.70287358,9.38680617 8.71380187,9.36725905 L8.71380187,9.36725905 L8.84969286,9.139845 C9.17279032,8.62160794 9.94394794,7.54413256 10.5511811,7.95843615 L10.5511811,7.95843615 L9.67026538,6.44520302 L9.66788967,6.44711006 C9.57048528,6.29550069 9.44267173,6.1615314 9.27732185,6.06284229 L9.27732185,6.06284229 C9.10056854,5.95604827 8.90575978,5.90551181 8.71332673,5.90551181 L8.71332673,5.90551181 C8.33986408,5.90551181 7.97542915,6.09669218 7.76969209,6.44138895" id="Fill-8" fill="url(#linearGradient-2)"></path>
+                <path d="M1.33858268,9.68785788 L1.33858268,11.9685039 L6.2829853,11.9670947 C7.50889376,11.9670947 7.79617161,11.1487867 8.50393701,9.68503937 L8.50393701,9.68503937 L1.33858268,9.68785788 Z" id="Fill-10" fill="url(#linearGradient-3)"></path>
+                <path d="M0.192766456,9.88758182 C-0.203893372,10.5758467 0.0311643034,11.4552699 0.71832888,11.8527654 L0.71832888,11.8527654 C0.849127103,11.9281852 0.990351271,11.9618632 1.13110153,11.9651836 L1.13110153,11.9651836 L1.13110153,11.9685039 L3.80203916,11.9680296 C3.21913403,11.9675553 2.33055915,11.0591974 2.8077831,9.96395029 L2.8077831,9.96395029 L7.16535433,2.42434304 L5.9000237,0 L0.192766456,9.88758182 Z" id="Fill-12" fill="url(#linearGradient-4)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

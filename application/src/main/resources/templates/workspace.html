@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>工作台</title>
+    <link id="favicon" rel="icon" type="image/x-icon" href="./pic/favicon.ico">
+    <link rel="stylesheet" href="./css/styles.05f60c9bcfb3a61042b5.css">
+    <style type="text/css">
+        .fancybox-margin {
+            margin-right: 0px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./css/styles.3a087bd44412a0368e80.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/styles.6f6f1883233db4ec0598.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/styles.05a9486fa50008b86fb3.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/styles.f7c936541a2d2c8cc636.css" media="all">
+    <link rel="stylesheet" type="text/css" href="./css/styles.63a8b018f59962ee2097.css" media="all">
+    <style>
+        gridster {
+            -ms-user-select: none;
+            -webkit-user-select: none;
+            background: grey;
+            box-sizing: border-box;
+            display: block;
+            height: 100%;
+            position: relative;
+            user-select: none;
+            width: 100%
+        }
+
+        gridster.fit {
+            overflow-x: hidden;
+            overflow-y: hidden
+        }
+
+        gridster.scrollVertical {
+            overflow-x: hidden;
+            overflow-y: auto
+        }
+
+        gridster.scrollHorizontal {
+            overflow-x: auto;
+            overflow-y: hidden
+        }
+
+        gridster.fixed {
+            overflow: auto
+        }
+
+        gridster.mobile {
+            overflow-x: hidden;
+            overflow-y: auto
+        }
+
+        gridster.mobile gridster-item {
+            position: relative
+        }
+
+        gridster.gridSize {
+            height: auto;
+            width: auto
+        }
+
+        gridster.gridSize.fit {
+            height: 100%;
+            width: 100%
+        }
+
+        gridster .gridster-column, gridster .gridster-row {
+            box-sizing: border-box;
+            display: none;
+            position: absolute;
+            transition: .3s
+        }
+
+        gridster.display-grid .gridster-column, gridster.display-grid .gridster-row {
+            display: block
+        }
+
+        gridster .gridster-column {
+            border-left: 1px solid #fff;
+            border-right: 1px solid #fff
+        }
+
+        gridster .gridster-row {
+            border-bottom: 1px solid #fff;
+            border-top: 1px solid #fff
+        }
+    </style>
+    <style>
+        gridster-preview {
+            background: rgba(0, 0, 0, .15);
+            display: none;
+            position: absolute
+        }
+    </style>
+    <style>
+        gridster-item {
+            -ms-user-select: text;
+            -webkit-user-select: text;
+            background: #fff;
+            box-sizing: border-box;
+            display: none;
+            overflow: hidden;
+            position: absolute;
+            transition: .3s;
+            user-select: text;
+            z-index: 1
+        }
+
+        gridster-item.gridster-item-moving {
+            cursor: move
+        }
+
+        gridster-item.gridster-item-moving, gridster-item.gridster-item-resizing {
+            box-shadow: 0 0 5px 5px rgba(0, 0, 0, .2), 0 6px 10px 0 rgba(0, 0, 0, .14), 0 1px 18px 0 rgba(0, 0, 0, .12);
+            transition: 0s;
+            z-index: 2
+        }
+
+        .gridster-item-resizable-handler {
+            position: absolute;
+            z-index: 2
+        }
+
+        .gridster-item-resizable-handler.handle-n {
+            cursor: ns-resize;
+            height: 10px;
+            left: 0;
+            right: 0;
+            top: 0
+        }
+
+        .gridster-item-resizable-handler.handle-e {
+            bottom: 0;
+            cursor: ew-resize;
+            right: 0;
+            top: 0;
+            width: 10px
+        }
+
+        .gridster-item-resizable-handler.handle-s {
+            bottom: 0;
+            cursor: ns-resize;
+            height: 10px;
+            left: 0;
+            right: 0
+        }
+
+        .gridster-item-resizable-handler.handle-w {
+            bottom: 0;
+            cursor: ew-resize;
+            left: 0;
+            top: 0;
+            width: 10px
+        }
+
+        .gridster-item-resizable-handler.handle-ne {
+            cursor: ne-resize;
+            height: 10px;
+            right: 0;
+            top: 0;
+            width: 10px
+        }
+
+        .gridster-item-resizable-handler.handle-nw {
+            cursor: nw-resize;
+            height: 10px;
+            left: 0;
+            top: 0;
+            width: 10px
+        }
+
+        .gridster-item-resizable-handler.handle-se {
+            border-color: rgba(0, 0, 0, 0);
+            border-style: solid;
+            border-width: 0 0 10px 10px;
+            bottom: 0;
+            cursor: se-resize;
+            height: 0;
+            right: 0;
+            width: 0
+        }
+
+        .gridster-item-resizable-handler.handle-sw {
+            bottom: 0;
+            cursor: sw-resize;
+            height: 10px;
+            left: 0;
+            width: 10px
+        }
+
+        gridster-item:hover .gridster-item-resizable-handler.handle-se {
+            border-color: rgba(0, 0, 0, 0) rgba(0, 0, 0, 0) #ccc
+        }
+    </style>
+</head>
+<body>
+
+<app-portal-root ng-version="9.1.13">
+    <router-outlet></router-outlet>
+    <app-portal-actual-root wt-version="2.30.0" class="thy-layout thy-layout--has-sidebar"><!---->
+        <thy-sidebar class="app-nav-sidebar thy-layout-sidebar">
+            <app-nav class="app-nav-area">
+                <div class="top-area"><a class="team-logo" href="javascript:;">
+                    <img src="./pic/transparent.png" alt="智齿科技" title="智齿科技"></a>
+                </div>
+                <div class="middle-area">
+                    <ul class="nav-apps">
+                        <li thytooltip="工作台" thytooltipplacement="right">
+                            <a class="app-item" th:href="@{/workspace}">
+                                <span class="item-icon">
+                                    <thy-icon thyiconname="dashboard-bold" class="thy-icon-dashboard-bold thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="genormal/dashboard-bold" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M14.358 6.002a.693.693 0 0 1 .918.341A7.973 7.973 0 0 1 16 9.673a7.966 7.966 0 0 1-1.555 4.739.693.693 0 1 1-1.115-.822 6.58 6.58 0 0 0 1.285-3.918c0-.958-.204-1.891-.598-2.752a.693.693 0 0 1 .341-.918zM8 1.672c.499 0 .994.046 1.48.137a.693.693 0 1 1-.255 1.362 6.655 6.655 0 0 0-4.47.736 6.611 6.611 0 0 0-3.37 5.765 6.58 6.58 0 0 0 1.226 3.837.693.693 0 1 1-1.128.805A7.966 7.966 0 0 1 0 9.672a7.996 7.996 0 0 1 8-8zm3.965 1.188a.693.693 0 0 1 1.216.642l-.033.073-.041.07-3.503 5.1-.013.016.038.043c.248.3.41.663.464 1.053l.015.147.006.15a2.125 2.125 0 1 1-1.788-2.1l.075.016.025-.05.036-.06 3.503-5.1z" id="ge测试"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </span>
+                            </a>
+                        </li>
+                        <li thytooltip="产品" thytooltipplacement="right" id="chanping">
+                            <a class="app-item" href="javascript:;">
+                            <span class="item-icon">
+                                <thy-icon class="thy-icon-applications thy-icon">
+                                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                        <g id="ckapplication/applications" stroke-width="1" fill-rule="evenodd">
+                                            <g id="ck编组" transform="translate(1 1)">
+                                                <path d="M.738 3.5A.739.739 0 0 1 0 2.762V.737C0 .33.33 0 .738 0h2.024C3.17 0 3.5.33 3.5.737v2.025c0 .407-.33.738-.738.738H.738zm5.25 0a.739.739 0 0 1-.738-.738V.737C5.25.33 5.58 0 5.988 0h2.024c.408 0 .738.33.738.737v2.025c0 .407-.33.738-.738.738H5.988zm5.25 0a.739.739 0 0 1-.738-.738V.737c0-.407.33-.737.738-.737h2.024c.408 0 .738.33.738.737v2.025c0 .407-.33.738-.738.738h-2.024zM2.766 5.244c.407 0 .737.33.737.737v2.026c0 .407-.33.737-.737.737H.741a.737.737 0 0 1-.738-.737V5.98c0-.407.33-.737.738-.737h2.025zm5.25 0c.407 0 .737.33.737.737v2.026c0 .407-.33.737-.737.737H5.991a.737.737 0 0 1-.738-.737V5.98c0-.407.33-.737.738-.737h2.025zm5.25 0c.407 0 .737.33.737.737v2.026c0 .407-.33.737-.737.737h-2.025a.737.737 0 0 1-.738-.737V5.98c0-.407.33-.737.738-.737h2.025zm-10.5 5.243c.407 0 .737.331.737.738v2.025c0 .407-.33.737-.737.737H.741a.737.737 0 0 1-.738-.737v-2.025c0-.407.33-.738.738-.738h2.025zm5.25 0c.407 0 .737.331.737.738v2.025c0 .407-.33.737-.737.737H5.991a.737.737 0 0 1-.738-.737v-2.025c0-.407.33-.738.738-.738h2.025zm5.25 0c.407 0 .737.331.737.738v2.025c0 .407-.33.737-.737.737h-2.025a.737.737 0 0 1-.738-.737v-2.025c0-.407.33-.738.738-.738h2.025z" id="ck形状结合"></path>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </thy-icon>
+                            </span>
+                            </a>
+                        </li>
+                        <li thytooltip="新建" thytooltipplacement="right" id="new">
+                            <a class="app-item" href="javascript:;">
+                                <span class="item-icon">
+                                    <thy-icon thyiconname="plus-bold" class="thy-icon-plus-bold thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="mvaction/plus-bold" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M15.3 7.3H8.7V.7a.7.7 0 0 0-1.4 0v6.6H.7a.7.7 0 1 0 0 1.4h6.6v6.6a.7.7 0 1 0 1.4 0V8.7h6.6a.7.7 0 0 0 0-1.4" id="mvFill-1"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </span>
+                            </a>
+                        </li>
+                        <li thytooltip="搜索" thytooltipplacement="right">
+                            <a class="app-item" href="javascript:;">
+                                <span class="item-icon">
+                                    <thy-icon thyiconname="search" class="thy-icon-search thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="ojnormal/search" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M6.751 12.303A5.557 5.557 0 0 1 1.2 6.751C1.2 3.691 3.69 1.2 6.751 1.2a5.558 5.558 0 0 1 5.551 5.551 5.557 5.557 0 0 1-5.551 5.552M6.751 0a6.751 6.751 0 1 0 4.309 11.949l3.855 3.855a.6.6 0 1 0 .849-.849l-3.854-3.853A6.751 6.751 0 0 0 6.751 0" id="ojFill-1"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </span>
+                            </a>
+                        </li>
+                        <li thytooltip="通知" thytooltipplacement="right">
+                            <a class="app-item" href="javascript:;">
+                                <span class="item-icon">
+                                    <thy-badge class="icon-badge thy-badge-container">
+                                        <thy-icon thyiconname="bell" class="thy-icon-bell thy-icon">
+                                            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                                                 fit="" height="1em" width="1em"
+                                                 preserveAspectRatio="xMidYMid meet"
+                                                 focusable="false">
+                                                <g id="dlnormal/bell" stroke-width="1" fill-rule="evenodd">
+                                                    <path d="M7.887 16.096h-.308.308zm2.336-1.942H5.675a2.232 2.232 0 0 0 2.212 1.942h.124a2.234 2.234 0 0 0 2.212-1.942zM7.947 0C6.99 0 6.206.779 6.206 1.732v.083c-1.98.413-3.478 2.168-3.478 4.256v3.613A4.345 4.345 0 0 0 1 12.958h1.728v.011h10.437v-.011h1.728v-.001a4.344 4.344 0 0 0-1.728-3.274V6.071c0-2.086-1.498-3.843-3.478-4.257v-.083A1.74 1.74 0 0 0 7.947 0zm0 1.2c.293 0 .541.243.541.531v1.057l.953.2c1.463.306 2.524 1.603 2.524 3.083v4.211l.478.359c.398.301.714.684.928 1.117h-.206l-1.2.012H3.929v-.012H2.522a3.15 3.15 0 0 1 .928-1.115l.479-.36V6.071A3.168 3.168 0 0 1 6.451 2.99l.955-.201V1.732c0-.288.248-.532.541-.532z"
+                                                          id="dlFill-1"></path>
+                                                </g>
+                                            </svg>
+                                        </thy-icon>
+                                    </thy-badge>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="bottom-area">
+                    <ul class="nav-apps">
+                        <li thytooltip="应用" thytooltipplacement="right">
+                            <a class="app-item" href="javascript:;">
+                                <span class="item-icon application-icon">
+                                    <thy-icon class="thy-icon-application thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="chapplication/application" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M8.575.137l6.045 3.49c.315.182.51.519.51.883v6.98c0 .364-.195.701-.51.883l-6.045 3.49a1.02 1.02 0 0 1-1.02 0l-6.045-3.49A1.02 1.02 0 0 1 1 11.49V4.51c0-.364.194-.701.51-.883L7.555.137a1.02 1.02 0 0 1 1.02 0zm-.51 1.118L2.223 4.627v6.745l5.842 3.372 5.84-3.372V4.627l-5.84-3.372zM4.19 5.232l.09.043L8.1 7.456l3.625-2.115a.612.612 0 0 1 .699 1l-.082.057-3.627 2.116v4.17a.612.612 0 0 1-1.215.099l-.008-.1V8.518l-3.817-2.18a.612.612 0 0 1 .517-1.106z" id="ch形状结合"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </span>
+                            </a>
+                        </li>
+                        <li thytooltip="帮助" thytooltipplacement="right"><a class="app-item" href="javascript:;">
+                            <span class="item-icon">
+                                <thy-badge class="icon-badge thy-badge-container" thysize="sm">
+                                    <thy-icon class="thy-icon-question-circle-bold thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
+                                             fit="" height="1em"
+                                             width="1em"
+                                             preserveAspectRatio="xMidYMid meet"
+                                             focusable="false">
+                                            <g id="nqtips/question-circle-bold" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M8 16c-2.14 0-4.083-.84-5.518-2.208A8 8 0 1 1 8 16zm0-1.4A6.6 6.6 0 1 0 8 1.4a6.6 6.6 0 0 0 0 13.2zM8.136 4c.768 0 1.394.2 1.867.626.473.414.709.981.709 1.702 0 .59-.154 1.075-.437 1.453-.107.118-.45.438-1.016.934a1.678 1.678 0 0 0-.473.579 1.72 1.72 0 0 0-.177.78v.165h-1.36v-.165c0-.45.072-.84.237-1.158.154-.32.615-.816 1.383-1.501l.141-.165c.213-.26.32-.544.32-.84 0-.39-.119-.697-.331-.921-.225-.225-.544-.331-.946-.331-.508 0-.874.154-1.11.473-.201.271-.296.661-.296 1.17H5.3c0-.875.248-1.56.768-2.057C6.576 4.248 7.262 4 8.136 4zm-.946 6.928h1.49v1.51H7.19v-1.51z" id="nq1.4"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </thy-badge>
+                            </span>
+                        </a>
+                        </li>
+                    </ul>
+                    <a class="pic-area" href="javascript:;">
+                        <thy-avatar thysize="38" class="thy-avatar-36 thy-avatar">
+                            <span class="avatar-default">
+                                <div id="user">
+                                </div>
+                            </span>
+                        </thy-avatar>
+                    </a>
+                </div>
+            </app-nav>
+            <div cdkdrag="" cdkdragboundary=".thy-layout" cdkdraglockaxis="x" class="sidebar-drag cdk-drag" style="left: 59px;"></div>
+        </thy-sidebar>
+        <div class="app-host-container thy-layout" id="app-host-container">
+            <router-outlet></router-outlet>
+            <app-workspace class="thy-layout">
+                <app-workspace-header>
+                    <thy-header styxprimarynavcontainer="" class="thy-layout-header header-has-border styx-primary-nav-container">
+                        <div class="layout-header-title">
+                            <span class="prefix-icon">
+                                <img class="app-icon" src="./css/app-workspace-square-fill.svg">
+                            </span>
+                            <span class="title-name">工作台</span>
+                        </div>
+                        <div class="layout-header-content"></div>
+                        <div class="layout-header-operation"></div>
+                    </thy-header>
+                </app-workspace-header>
+                <router-outlet></router-outlet>
+                <app-dashboard-detail class="thy-layout dashboard-detail">
+                    <thy-loading class="thy-loading">
+                        <div></div>
+                    </thy-loading>
+                    <thy-header styxsecondarynavcontainer="" thysize="sm" class="thy-layout-header thy-layout-header-sm styx-secondary-nav-container">
+                        <div class="layout-header-title">
+                            <span class="title-name"></span>
+                        </div>
+                        <div class="layout-header-content">
+                            <thy-nav thytype="thirdly" class="thy-nav nav-thirdly">
+                                <a class="styx-secondary-nav-has-divider nav-link" th:href="@{/workspace}" thynavlink="">
+                                    <thy-icon thyiconname="arrow-left-bold" class="thy-icon-arrow-left-bold thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="cpnavigation/arrow-left-bold" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M7.3 4.403l-2.789 2.98a.7.7 0 0 1-1.022-.956L7.45 2.194a.698.698 0 0 1 1.085-.067l3.97 4.323a.7.7 0 1 1-1.031.947L8.7 4.375v8.892c0 .456-.309.833-.7.833-.392 0-.7-.377-.7-.833V4.403z" id="cp路径" transform="rotate(-90 7.995 8)"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </a>
+                                <a class="styx-secondary-nav-link mr-2 no-line nav-link" href="javascript:;" thynavlink="">
+                                    <span class="styx-secondary-nav-link-text text-truncate flexible-text-container" thyflexibletext="" thytooltipplacement="bottom"> 默认仪表盘 </span>
+                                    <thy-icon thyiconname="angle-down" class="thy-icon-angle-down thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em"
+                                             width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="amnavigation/angle-down" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M7.978 11.997l-.005.006L2.3 6.33l.83-.831 4.848 4.848L12.826 5.5l.83.83-5.673 5.673-.005-.006z"
+                                                      id="am形状结合"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </a>
+                                <span thylabel="emboss-primary" class="thy-label thy-label-emboss-primary">全员可见</span>
+                            </thy-nav>
+                        </div>
+                        <div class="layout-header-operation">
+                            <thy-icon-nav class="thy-icon-nav">
+                                <a href="javascript:;" thyiconnavlink="" thyiconnavlinkicon="sync" thyoriginactiveclass="active" thytooltip="刷新" thytooltipoffset="10" class="thy-icon-nav-link">
+                                    <thy-icon class="thy-icon-sync thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em"
+                                             width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="pxnormal/sync" stroke-width="1" fill-rule="evenodd">
+                                                <g id="px编组" transform="rotate(-45 8.657 8.828)" fill-rule="nonzero">
+                                                    <path d="M1.736 7.305L.507 7.197a.5.5 0 0 1-.311-.85l2.14-2.152a.5.5 0 0 1 .766.068l1.715 2.49a.5.5 0 0 1-.455.781l-1.604-.14c.04.08.062.17.062.266a6.062 6.062 0 0 0 10.241 4.387.6.6 0 1 1 .828.868A7.262 7.262 0 0 1 1.62 7.66c.001-.133.044-.256.117-.355zm14.403.397h1.431a.5.5 0 0 1 .384.82l-1.943 2.33a.5.5 0 0 1-.77-.002l-1.926-2.33a.5.5 0 0 1 .385-.818h1.241A6.06 6.06 0 0 0 4.82 3.162a.6.6 0 1 1-.804-.892A7.228 7.228 0 0 1 8.88.4a7.26 7.26 0 0 1 7.259 7.302z"
+                                                          id="px形状结合"></path>
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </a>
+                                <a class="dashboard-nav-expand-arrows thy-icon-nav-link" href="javascript:;"
+                                   thyiconnavlink="" thyiconnavlinkicon="expand-arrows" thyoriginactiveclass="active"
+                                   thytooltip="全屏" thytooltipoffset="10">
+                                    <thy-icon class="thy-icon-expand-arrows thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em"
+                                             width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="hgaction/expand-arrows" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M1.2 4.723a.6.6 0 0 1-.6-.6V1.201A.6.6 0 0 1 1.2.6l.007.002h2.917a.6.6 0 1 1 0 1.2H2.705L6.06 5.006a.6.6 0 1 1-.829.868L1.8 2.597v1.526a.6.6 0 0 1-.6.6zm9.456 1.152a.6.6 0 0 1-.83-.868l3.354-3.204h-1.418a.6.6 0 0 1 0-1.2h2.916l.007-.001a.6.6 0 0 1 .601.599v2.923a.6.6 0 0 1-1.2 0V2.598l-3.43 3.277zm4.63 8.805l.001.007a.6.6 0 0 1-.6.6h-2.923a.6.6 0 1 1 0-1.2h1.526l-3.276-3.431a.598.598 0 0 1 .02-.849.598.598 0 0 1 .847.02l3.204 3.354v-1.418a.6.6 0 1 1 1.2 0v2.917zM5.233 10.015a.6.6 0 1 1 .83.868l-3.356 3.204h1.42a.6.6 0 0 1 0 1.2H1.21l-.007.001a.6.6 0 0 1-.6-.599v-2.923a.6.6 0 0 1 1.2 0v1.526l3.431-3.277z"
+                                                      id="hg形状结合"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </a>
+                                <span class="layout-header-operation-item-has-divide-lg"></span>
+                                <a href="javascript:;"
+                                   thyiconnavlink=""
+                                   thyiconnavlinkicon="list"
+                                   thyoriginactiveclass="active"
+                                   thytooltip="更多"
+                                   thytooltipoffset="10"
+                                   thytooltipplacement="bottom"
+                                   class="thy-icon-nav-link">
+                                    <thy-icon class="thy-icon-list thy-icon">
+                                        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em"
+                                             width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
+                                            <g id="klnormal/list" stroke-width="1" fill-rule="evenodd">
+                                                <path d="M.664 3.2a.6.6 0 1 1 0-1.2h2.767a.6.6 0 1 1 0 1.2H.664zm6.307 0a.6.6 0 1 1 0-1.2H15.4a.6.6 0 0 1 0 1.2H6.971zM.664 8.6a.6.6 0 1 1 0-1.2h2.767a.6.6 0 1 1 0 1.2H.664zm6.307 0a.6.6 0 1 1 0-1.2H15.4a.6.6 0 0 1 0 1.2H6.971zM.664 14a.6.6 0 0 1 0-1.2h2.767a.6.6 0 0 1 0 1.2H.664zm6.307 0a.6.6 0 0 1 0-1.2H15.4a.6.6 0 0 1 0 1.2H6.971z"
+                                                      id="kl形状结合"></path>
+                                            </g>
+                                        </svg>
+                                    </thy-icon>
+                                </a>
+                            </thy-icon-nav>
+                        </div>
+                    </thy-header>
+                    <thy-content class="p-0 h-100 dashboard-fullscreen thy-layout-content">
+                        <thy-loading class="thy-loading">
+                            <div></div>
+                        </thy-loading>
+                        <gridster class="dashboard-detail-gridster scrollVertical" style="padding: 10px;">
+                            <div class="gridster-column" style="left: 10px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 109.417px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 208.833px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 308.25px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 407.667px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 507.083px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column" style="left: 606.5px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 705.917px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 805.333px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 904.75px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 1004.17px; width: 89.4167px; height: 1160px;"></div>
+                            <div class="gridster-column"
+                                 style="left: 1103.58px; width: 89.4167px; height: 1160px;"></div><!---->
+                            <div class="gridster-row" style="top: 10px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 140px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 270px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 400px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 530px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 660px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 790px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 920px; width: 1183px; height: 120px;"></div>
+                            <div class="gridster-row" style="top: 1050px; width: 1183px; height: 120px;"></div><!---->
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 10px; top: 10px; width: 387.667px; height: 380px;">
+                                <widget-item class="widget-item">
+                                    <widget-general-text class="widget-item-layout widget-general-text">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title widget-header-title-bottom-spacing">
+                                                <span class="title-text text-truncate title-spacing">简介</span>
+                                            </div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <div class="flex-grow-1">
+                                                <div class="thy-rich-editor-wrapper display-mode">
+                                                    <div class="ql-container ql-snow">
+                                                        <div class="ql-editor"><p><span style="color: rgb(51, 51, 51);">欢迎使用 PCode </span></p>
+                                                            <p><span style="color: rgb(51, 51, 51);">&nbsp;&nbsp; &nbsp;&nbsp;  PCode 是简单易用的新一代研发管理平台，让研发管理自动化、数据化、智能化，帮助企业提升研发效能。从路线图到专业的敏捷开发管理，多项目进度跟踪，知识沉淀与测试管理；覆盖研发全流程，通过增量迭代，实现计划、研发和交付的可预测和可控制，有效连接需求规划、开发过程、测试和持续集成。</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </widget-body>
+                                    </widget-general-text>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 408px; top: 10px; width: 387.667px; height: 380px;">
+                                <widget-item class="widget-item">
+                                    <widget-general-products class="widget-item-layout widget-general-products">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title widget-header-title-bottom-spacing">
+                                                <span class="title-text text-truncate title-spacing">产品</span>
+                                            </div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <ul class="apps">
+                                                <li>
+                                                    <a th:href="@{/agile}">
+                                                        <img class="title-icon" src="./css/app-agile-square-fill-large.svg">
+                                                        <div class="title-name">
+                                                            <div class="name-en"> Agile</div>
+                                                            <div class="name-zh">敏捷开发</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;">
+                                                        <img class="title-icon" src="./css/app-testhub-square-fill-large.svg">
+                                                        <div class="title-name">
+                                                            <div class="name-en"> Testhub <!----></div>
+                                                            <div class="name-zh">测试管理</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;">
+                                                        <img class="title-icon" src="./css/app-wiki-square-fill-large.svg">
+                                                        <div class="title-name">
+                                                            <div class="name-en"> Wiki </div>
+                                                            <div class="name-zh">知识库</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:;">
+                                                        <img class="title-icon" src="./css/app-plan-square-fill-large.svg">
+                                                        <div class="title-name">
+                                                            <div class="name-en"> Plan </div>
+                                                            <div class="name-zh">项目集</div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </widget-body>
+                                    </widget-general-products>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item"
+                                           style="z-index: 1; display: block; left: 805px; top: 10px; width: 387.667px; height: 380px; margin-right: 10px;">
+                                <widget-item class="widget-item">
+                                    <widget-general-tip class="widget-item-layout widget-general-tip">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title widget-header-title-bottom-spacing">
+                                               <span class="title-text text-truncate title-spacing">使用指南</span>
+                                            </div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <div class="tip-wrapper">
+                                                <a class="tip-content" target="_black" href="https://blog.pingcode.com/scrum-vs-kanban/">
+                                                    <img  src="./pic/9b34e206-980d-4d09-9896-ad93f8df62e9.jpg">
+                                                    <span class="tips-content-title">Scrum vs Kanban，如何选择？</span>
+                                                </a>
+                                            </div>
+                                        </widget-body>
+                                    </widget-general-tip>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 10px; top: 400px; width: 586.5px; height: 380px;">
+                                <widget-item class="widget-item">
+                                    <widget-agile-project-list class="widget-item-layout">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title">
+                                                <span class="title-text text-truncate title-spacing">最近访问的项目</span>
+                                            </div>
+                                            <div class="widget-header-description text-truncate"> 共<span class="black" id="projectCount">  </span>个项目</div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <thy-grid thyclassname="table-hover table-fixed dashboard-widget-grid"
+                                                      class="thy-grid-hover-display-operation thy-grid">
+                                                <table class="table table-default table-hover table-fixed dashboard-widget-grid">
+                                                    <colgroup>
+                                                        <col width="auto">
+                                                        <col width="25%">
+                                                        <col width="27%">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> 名称 </th>
+                                                            <th> 创建人 </th>
+                                                            <th> 创建时间 </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody cdkdroplist="" class="cdk-drop-list cdk-drop-list-disabled" thydragdrop="" id="cdk-drop-list-3">
+<!--                                                        <tr cdkdrag="" class="thy-sortable-item cdk-drag cdk-drag-disabled">-->
+<!--                                                            <td class="text-truncate">-->
+<!--                                                               <span class="icon-text icon-text-sm text-truncate d-block">-->
+<!--                                                                   <thy-icon class="thy-icon-kanban-square-fill thy-icon" style="color: rgb(86, 171, 251);">-->
+<!--                                                                       <svg viewBox="0 0 16 16"-->
+<!--                                                                            xmlns="http://www.w3.org/2000/svg" fit=""-->
+<!--                                                                            height="1em" width="1em"-->
+<!--                                                                            preserveAspectRatio="xMidYMid meet"-->
+<!--                                                                            focusable="false">-->
+<!--                                                                           <g id="kard/kanban-square-fill"-->
+<!--                                                                                             stroke-width="1"-->
+<!--                                                                                             fill-rule="evenodd">-->
+<!--                                                                               <path d="M13.77 8.5c0 .579-.47 1.048-1.05 1.048H9.85A1.048 1.048 0 0 1 8.802 8.5V3.887c0-.578.469-1.048 1.048-1.048h2.87c.58 0 1.05.47 1.05 1.048V8.5zm-6.571 3.57c0 .594-.52 1.075-1.158 1.075H3.388c-.64 0-1.157-.481-1.157-1.074V3.93c0-.593.518-1.074 1.157-1.074H6.04c.639 0 1.158.48 1.158 1.074v8.14zM12.714 0H3.286A3.286 3.286 0 0 0 0 3.286v9.429A3.286 3.286 0 0 0 3.286 16h9.428A3.286 3.286 0 0 0 16 12.715v-9.43A3.286 3.286 0 0 0 12.714 0z" id="kaFill-1"></path>-->
+<!--                                                                           </g>-->
+<!--                                                                       </svg>-->
+<!--                                                                   </thy-icon>-->
+<!--                                                                   <span>呼叫虚拟组</span>-->
+<!--                                                               </span>-->
+<!--                                                            </td>-->
+<!--                                                            <td class="text-truncate">-->
+<!--                                                                <thy-avatar class="mw-100 align-middle d-flex dashboard-widget-avatar thy-avatar-24 thy-avatar" thysize="24">-->
+<!--                                                                    <span class="avatar-default">-->
+<!--                                                                        <div ></div>-->
+<!--                                                                    </span>-->
+<!--                                                                    <div class="avatar-name">刘雷</div>-->
+<!--                                                                </thy-avatar>-->
+<!--                                                            </td>-->
+<!--                                                            <td class="text-truncate">-->
+<!--                                                                <span>2020年6月19日</span>-->
+<!--                                                            </td>-->
+<!--                                                        </tr>-->
+                                                    </tbody>
+                                                </table>
+                                                <thy-loading class="thy-loading">
+                                                    <div></div>
+                                                </thy-loading>
+                                            </thy-grid>
+                                        </widget-body>
+                                    </widget-agile-project-list>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 607px; top: 400px; width: 586.5px; height: 380px; margin-right: 10px;">
+                                <widget-item class="widget-item">
+                                    <widget-work-item-list class="widget-item-layout widget-work-item-list">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title">
+                                                <span class="title-text text-truncate title-spacing">我负责的工作项</span>
+                                            </div>
+                                            <div class="widget-header-description text-truncate"> 共<span class="black"> 3 </span>个工作项</div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <thy-grid thyclassname="table-hover table-fixed dashboard-widget-grid"
+                                                      class="thy-grid-hover-display-operation thy-grid">
+                                                <table class="table table-default table-hover table-fixed dashboard-widget-grid">
+                                                    <colgroup>
+                                                        <col width="auto">
+                                                        <col width="25%">
+                                                        <col width="27%">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th></th>
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody cdkdroplist="" class="cdk-drop-list cdk-drop-list-disabled"
+                                                           thydragdrop="" id="cdk-drop-list-2">
+                                                        <tr cdkdrag="" class="thy-sortable-item cdk-drag cdk-drag-disabled">
+                                                            <td class="text-truncate">
+                                                                <thy-icon class="pr-1 thy-icon-bug-square-fill thy-icon"
+                                                                      style="color: rgb(255, 117, 117);">
+                                                                    <svg viewBox="0 0 16 16"
+                                                                         xmlns="http://www.w3.org/2000/svg" fit=""
+                                                                         height="1em" width="1em"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         focusable="false">
+                                                                        <g id="ebrd/bug-square-fill" stroke-width="1"
+                                                                           fill-rule="evenodd">
+                                                                            <path d="M12.766 0a3.2 3.2 0 0 1 3.192 3.192v9.575a3.2 3.2 0 0 1-3.192 3.191H3.191A3.201 3.201 0 0 1 0 12.767V3.192A3.202 3.202 0 0 1 3.191 0h9.575zm-1.441 13.017c1.248-1.554 1.514-2.927.9-4.194-.607-1.25-1.73-1.719-3.562-1.365l2.662 5.559zM7.98 7.932L6.104 11.85a3.3 3.3 0 0 0 2.114.763c.647 0 1.25-.185 1.761-.507L7.98 7.932zm0-1.162c.761-.19 1.446-.269 2.053-.235.008-.07.011-.148.011-.231 0-.674-.255-1.28-.66-1.692a2.62 2.62 0 0 1 1.429-.415.547.547 0 0 0 0-1.094c-.98 0-1.825.35-2.517.958a1.7 1.7 0 0 0-.486.014 3.728 3.728 0 0 0-2.533-.972.547.547 0 0 0 0 1.094c.555 0 1.057.161 1.496.459a2.426 2.426 0 0 0-.607 1.872c.546-.004 1.151.076 1.814.242zm-3.345 6.247l2.662-5.56c-1.832-.353-2.955.116-3.561 1.366-.615 1.267-.35 2.64.9 4.194z"
+                                                                                  id="eb形状结合"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </thy-icon>
+                                                                <span class="text-muted pr-2">HJXNZ-1472</span>
+                                                                <span class="text-body" title="【通话记录重构】坐席忙碌时，呼入一直在排队状态，排队超时没有生效">【通话记录重构】坐席忙碌时，呼入一直在排队状态，排队超时没有生效</span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span class="text-truncate align-middle mw-100 thy-label thy-label-outline thy-label--sm"
+                                                                    thylabel="outline" thysize="sm" title="已修复"
+                                                                    style="color: rgb(246, 198, 89); border-color: rgb(246, 198, 89);">已修复 </span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span>呼叫虚拟组</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr cdkdrag="" class="thy-sortable-item cdk-drag cdk-drag-disabled">
+                                                            <td class="text-truncate">
+                                                                <thy-icon class="pr-1 thy-icon-bug-square-fill thy-icon"
+                                                                          style="color: rgb(255, 117, 117);">
+                                                                    <svg viewBox="0 0 16 16"
+                                                                         xmlns="http://www.w3.org/2000/svg" fit=""
+                                                                         height="1em" width="1em"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         focusable="false">
+                                                                        <g id="ebrd/bug-square-fill" stroke-width="1"
+                                                                           fill-rule="evenodd">
+                                                                            <path d="M12.766 0a3.2 3.2 0 0 1 3.192 3.192v9.575a3.2 3.2 0 0 1-3.192 3.191H3.191A3.201 3.201 0 0 1 0 12.767V3.192A3.202 3.202 0 0 1 3.191 0h9.575zm-1.441 13.017c1.248-1.554 1.514-2.927.9-4.194-.607-1.25-1.73-1.719-3.562-1.365l2.662 5.559zM7.98 7.932L6.104 11.85a3.3 3.3 0 0 0 2.114.763c.647 0 1.25-.185 1.761-.507L7.98 7.932zm0-1.162c.761-.19 1.446-.269 2.053-.235.008-.07.011-.148.011-.231 0-.674-.255-1.28-.66-1.692a2.62 2.62 0 0 1 1.429-.415.547.547 0 0 0 0-1.094c-.98 0-1.825.35-2.517.958a1.7 1.7 0 0 0-.486.014 3.728 3.728 0 0 0-2.533-.972.547.547 0 0 0 0 1.094c.555 0 1.057.161 1.496.459a2.426 2.426 0 0 0-.607 1.872c.546-.004 1.151.076 1.814.242zm-3.345 6.247l2.662-5.56c-1.832-.353-2.955.116-3.561 1.366-.615 1.267-.35 2.64.9 4.194z"
+                                                                                  id="eb形状结合"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </thy-icon>
+                                                                <span class="text-muted pr-2">HJXNZ-1508</span>
+                                                                <span class="text-body" title="【通话报表重构】多个指标展示空白">【通话报表重构】多个指标展示空白</span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span class="text-truncate align-middle mw-100 thy-label thy-label-outline thy-label--sm"
+                                                                        thylabel="outline" thysize="sm" title="新提交"
+                                                                        style="color: rgb(86, 171, 251); border-color: rgb(86, 171, 251);"> 新提交 </span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span>呼叫虚拟组</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr cdkdrag="" class="thy-sortable-item cdk-drag cdk-drag-disabled">
+                                                            <td class="text-truncate">
+                                                                <thy-icon class="pr-1 thy-icon-bug-square-fill thy-icon"
+                                                                          style="color: rgb(255, 117, 117);">
+                                                                    <svg viewBox="0 0 16 16"
+                                                                         xmlns="http://www.w3.org/2000/svg" fit=""
+                                                                         height="1em" width="1em"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         focusable="false">
+                                                                        <g id="ebrd/bug-square-fill" stroke-width="1"
+                                                                           fill-rule="evenodd">
+                                                                            <path d="M12.766 0a3.2 3.2 0 0 1 3.192 3.192v9.575a3.2 3.2 0 0 1-3.192 3.191H3.191A3.201 3.201 0 0 1 0 12.767V3.192A3.202 3.202 0 0 1 3.191 0h9.575zm-1.441 13.017c1.248-1.554 1.514-2.927.9-4.194-.607-1.25-1.73-1.719-3.562-1.365l2.662 5.559zM7.98 7.932L6.104 11.85a3.3 3.3 0 0 0 2.114.763c.647 0 1.25-.185 1.761-.507L7.98 7.932zm0-1.162c.761-.19 1.446-.269 2.053-.235.008-.07.011-.148.011-.231 0-.674-.255-1.28-.66-1.692a2.62 2.62 0 0 1 1.429-.415.547.547 0 0 0 0-1.094c-.98 0-1.825.35-2.517.958a1.7 1.7 0 0 0-.486.014 3.728 3.728 0 0 0-2.533-.972.547.547 0 0 0 0 1.094c.555 0 1.057.161 1.496.459a2.426 2.426 0 0 0-.607 1.872c.546-.004 1.151.076 1.814.242zm-3.345 6.247l2.662-5.56c-1.832-.353-2.955.116-3.561 1.366-.615 1.267-.35 2.64.9 4.194z"
+                                                                                  id="eb形状结合"></path>
+                                                                        </g>
+                                                                    </svg>
+                                                                </thy-icon>
+                                                                <span class="text-muted pr-2">HJXNZ-1542</span><span
+                                                                        class="text-body"
+                                                                        title="【通话报表重构】自定义满意度，按键数和按键的百分比都不展示">【通话报表重构】自定义满意度，按键数和按键的百分比都不展示</span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span class="text-truncate align-middle mw-100 thy-label thy-label-outline thy-label--sm"
+                                                                        thylabel="outline" thysize="sm" title="新提交"
+                                                                        style="color: rgb(86, 171, 251); border-color: rgb(86, 171, 251);"> 新提交 </span>
+                                                            </td>
+                                                            <td class="text-truncate">
+                                                                <span>呼叫虚拟组</span>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <thy-loading class="thy-loading">
+                                                    <div></div>
+                                                </thy-loading>
+                                            </thy-grid>
+                                        </widget-body>
+                                    </widget-work-item-list>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 10px; top: 790px; width: 586.5px; height: 380px; margin-bottom: 10px;">
+                                <widget-item class="widget-item">
+                                    <widget-wiki-page-list class="widget-item-layout">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title">
+                                                <span class="title-text text-truncate title-spacing">最近编辑的页面</span>
+                                            </div>
+                                            <div class="widget-header-description text-truncate"> 共<span class="black"> 0 </span>个页面 </div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <thy-grid thyclassname="table-hover table-fixed dashboard-widget-grid"
+                                                      class="dashboard-widget-grid-h-100 thy-grid-hover-display-operation thy-grid">
+                                                <table class="table table-default table-hover table-fixed dashboard-widget-grid">
+                                                    <colgroup>
+                                                        <col width="">
+                                                        <col width="30%">
+                                                    </colgroup>
+                                                    <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody cdkdroplist="" class="cdk-drop-list cdk-drop-list-disabled"
+                                                           thydragdrop="" id="cdk-drop-list-0">
+                                                    </tbody>
+                                                </table>
+                                                <thy-loading class="thy-loading">
+                                                    <div></div>
+                                                </thy-loading>
+                                            </thy-grid>
+                                        </widget-body>
+                                    </widget-wiki-page-list>
+                                </widget-item>
+                            </gridster-item>
+                            <gridster-item class="dashboard-girdster-item" style="z-index: 1; display: block; left: 607px; top: 790px; width: 586.5px; height: 380px; margin-bottom: 10px; margin-right: 10px;">
+                                <widget-item class="widget-item">
+                                    <widget-testhub-test-case-list class="widget-item-layout">
+                                        <widget-header class="widget-header">
+                                            <div class="widget-header-title">
+                                                <span class="title-text text-truncate title-spacing">最近访问的用例</span>
+                                            </div>
+                                            <div class="widget-header-description text-truncate"> 共<span class="black"> 0 </span>个用例</div>
+                                        </widget-header>
+                                        <widget-body class="widget-body">
+                                            <thy-grid thyclassname="table-hover table-fixed dashboard-widget-grid"
+                                                      class="dashboard-widget-grid-h-100 thy-grid-hover-display-operation thy-grid">
+                                                <table class="table table-default table-hover table-fixed dashboard-widget-grid">
+                                                    <colgroup>
+                                                        <col width="auto">
+                                                        <col width="25%">
+                                                        <col width="27%">
+                                                    </colgroup>
+                                                    <thead>
+                                                        <tr>
+                                                            <th> 名称 </th>
+                                                            <th> 状态 </th>
+                                                            <th> 测试库 </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody cdkdroplist=""
+                                                           class="cdk-drop-list cdk-drop-list-disabled ng-star-inserted"
+                                                           thydragdrop="" id="cdk-drop-list-4">
+                                                    <tr class="clear-hover ng-star-inserted">
+                                                        <td height="280px" colspan="3">
+                                                            <thy-empty
+                                                                    class="thy-empty-state thy-empty-state--sm ng-star-inserted">
+                                                                <div class="thy-empty-icon">
+                                                                    <svg xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         height="134px" version="1.1"
+                                                                         viewBox="0 0 148 134" width="148px"
+                                                                         xmlns="http://www.w3.org/2000/svg"
+                                                                         class="ng-star-inserted">
+                                                                        <defs>
+                                                                            <filter filterUnits="objectBoundingBox"
+                                                                                    height="100.0%" id="filter-1"
+                                                                                    width="100.0%" x="0.0%" y="0.0%">
+                                                                                <fegaussianblur in="SourceGraphic"
+                                                                                                stdDeviation="0"></fegaussianblur>
+                                                                            </filter>
+                                                                        </defs>
+                                                                        <g fill="none" fill-rule="evenodd" id="148x134"
+                                                                           stroke="none" stroke-width="1">
+                                                                            <g id="编组-6"
+                                                                               transform="translate(1.000000, 1.000000)">
+                                                                                <ellipse cx="73.0800017" cy="115.920003"
+                                                                                         fill="#EDEEF2"
+                                                                                         filter="url(#filter-1)"
+                                                                                         id="椭圆形" opacity="0.3"
+                                                                                         rx="73.0800017"
+                                                                                         ry="16.8000004"></ellipse>
+                                                                                <g id="编组-5"
+                                                                                   transform="translate(15.120000, 0.000000)">
+                                                                                    <polygon fill="#E2E4E9" id="矩形"
+                                                                                             points="19.2789848 49.5600011 99.1200023 48.7200011 117.600003 75.9297673 117.600003 92.313049 0 92.313049 0 75.0356267"></polygon>
+                                                                                    <path d="M23.5200005,0 L94.0800002,0 C97.7913538,2.06413823e-16 100.8,3.00864655 100.8,6.72000015 L100.8,99.1200023 L100.8,99.1200023 L16.8000004,99.1200023 L16.8000004,6.72000015 C16.8000004,3.00864655 19.8086469,1.56994302e-15 23.5200005,0 Z"
+                                                                                          fill="#F9FAFB" id="矩形"></path>
+                                                                                    <path d="M30.9200007,12.4400003 L86.6800019,12.4400003 C88.5356787,12.4400003 90.040002,13.9443236 90.040002,15.8000004 L90.040002,42.000001 C90.040002,43.8556778 88.5356787,45.360001 86.6800019,45.360001 L30.9200007,45.360001 C29.0643239,45.360001 27.5600006,43.8556778 27.5600006,42.000001 L27.5600006,15.8000004 C27.5600006,13.9443236 29.0643239,12.4400003 30.9200007,12.4400003 Z"
+                                                                                          fill="#E8EAEE" id="矩形"></path>
+                                                                                    <text fill="#BCBECD"
+                                                                                          font-family="PingFangSC-Medium, PingFang SC"
+                                                                                          font-size="15.1200003"
+                                                                                          font-weight="400"
+                                                                                          id="&lt;/null&gt;">
+                                                                                        <tspan x="33.6000008"
+                                                                                               y="32.8000004">&lt;/null&gt;
+                                                                                        </tspan>
+                                                                                    </text>
+                                                                                    <rect fill="#E8EAEE"
+                                                                                          height="5.04000011" id="矩形"
+                                                                                          rx="2.52000006"
+                                                                                          width="61.4800014"
+                                                                                          x="27.5600006"
+                                                                                          y="52.0800012"></rect>
+                                                                                    <rect fill="#E8EAEE"
+                                                                                          height="5.04000011" id="矩形备份"
+                                                                                          rx="2.52000006"
+                                                                                          width="61.4800014"
+                                                                                          x="27.5600006"
+                                                                                          y="63.8400014"></rect>
+                                                                                    <path d="M0,75.6000017 L29.280235,75.6000017 C32.0637502,75.6000017 34.3202352,77.8564866 34.3202352,80.6400018 L34.3202352,86.2591426 C34.3202352,89.0426578 36.5767201,91.2991427 39.3602353,91.2991427 L78.4136737,91.2991427 C81.1971889,91.2991427 83.4536738,89.0426578 83.4536738,86.2591426 L83.4536738,80.6400018 C83.4536738,77.8564866 85.7101587,75.6000017 88.4936739,75.6000017 L117.600003,75.6000017 L117.600003,75.6000017 L117.600003,110.880003 C117.600003,115.519195 113.839194,119.280003 109.200002,119.280003 L8.40000019,119.280003 C3.76080819,119.280003 -6.53729019e-15,115.519195 0,110.880003 L0,75.6000017 L0,75.6000017 Z"
+                                                                                          fill="#EDEFF2" id="矩形"></path>
+                                                                                </g>
+                                                                            </g>
+                                                                        </g>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="thy-empty-text"> 暂无数据</div>
+                                                            </thy-empty>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <thy-loading class="thy-loading">
+                                                    <div></div>
+                                                </thy-loading>
+                                            </thy-grid>
+                                        </widget-body>
+                                    </widget-testhub-test-case-list>
+                                </widget-item>
+                            </gridster-item>
+                            <div class="empty-block" style="top: 1170px;"></div>
+                            <gridster-preview class="gridster-preview"></gridster-preview>
+                        </gridster>
+                    </thy-content>
+                </app-dashboard-detail>
+            </app-workspace>
+            <app-plan-root class="plan-root thy-layout plan" style="display:none;" ng-version="9.1.12"
+                           wt-version="2.30.0">
+                <router-outlet></router-outlet>
+                <ng-component>
+                    <router-outlet></router-outlet>
+                </ng-component>
+            </app-plan-root>
+            <app-testhub-root style="display:none;" class="thy-layout testhub" ng-version="9.1.13" wt-version="2.26.0">
+                <router-outlet></router-outlet>
+                <ng-component>
+                    <router-outlet></router-outlet>
+                </ng-component>
+            </app-testhub-root>
+            <app-agile-root style="display:none;" class="thy-layout agile" ng-version="9.1.13" wt-version="2.20.0">
+                <router-outlet></router-outlet>
+                <ng-component>
+                    <router-outlet></router-outlet>
+                </ng-component>
+            </app-agile-root>
+            <wiki-root style="display:none;" class="thy-layout wiki" ng-version="9.1.13">
+                <router-outlet></router-outlet>
+                <ng-component>
+                    <router-outlet></router-outlet>
+                </ng-component>
+            </wiki-root>
+        </div>
+        <app-shortcut class="app-shortcut d-none">
+            <thy-icon-nav class="shortcut-icon-nav thy-icon-nav-individual thy-icon-nav" thytype="individual"><a
+                    href="javascript:;" thyiconnavlink="" thytooltipplacement="bottom" class="thy-icon-nav-link"><!---->
+                <thy-icon class="thy-icon-outdent thy-icon">
+                    <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em"
+                         preserveAspectRatio="xMidYMid meet" focusable="false">
+                        <g id="lynavigation/outdent" stroke-width="1" fill-rule="evenodd">
+                            <path d="M13.508 1.47l.844.854-6.15 6.078 6.011 6.073-.853.844-6.083-6.145a1.1 1.1 0 0 1-.071-1.466l.08-.089 6.222-6.148zM3.4 1v14.2H2.2V1h1.2z"
+                                  id="ly形状结合"></path>
+                        </g>
+                    </svg>
+                </thy-icon>
+            </a></thy-icon-nav>
+            <div class="shortcut-container" ></div>
+        </app-shortcut>
+    </app-portal-actual-root>
+</app-portal-root>
+
+<div class="cdk-overlay-container"></div>
+<script src="../js/jquery-3.5.1.min.js" type="text/javascript" ></script>
+<script src="../js/navigation_left.js" type="text/javascript"></script>
+<script th:inline="javascript" type="application/javascript">
+    var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
+
+    $(document).ready(function (){
+        $.ajax({
+            url:basePath+"/project/projectList",
+            cache:false,
+            async:false,
+            type:"POST",
+            success:function (result) {
+                if(result.retCode=="000000"){
+                    $("#projectCount").append(result.items.length);
+                    var tr;
+                    var kaban= "                                                                       <svg viewBox=\"0 0 16 16\"\n" +
+                        "                                                                            xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
+                        "                                                                            height=\"1em\" width=\"1em\"\n" +
+                        "                                                                            preserveAspectRatio=\"xMidYMid meet\"\n" +
+                        "                                                                            focusable=\"false\">\n" +
+                        "                                                                           <g id=\"kard/kanban-square-fill\"\n" +
+                        "                                                                                             stroke-width=\"1\"\n" +
+                        "                                                                                             fill-rule=\"evenodd\">\n" +
+                        "                                                                               <path d=\"M13.77 8.5c0 .579-.47 1.048-1.05 1.048H9.85A1.048 1.048 0 0 1 8.802 8.5V3.887c0-.578.469-1.048 1.048-1.048h2.87c.58 0 1.05.47 1.05 1.048V8.5zm-6.571 3.57c0 .594-.52 1.075-1.158 1.075H3.388c-.64 0-1.157-.481-1.157-1.074V3.93c0-.593.518-1.074 1.157-1.074H6.04c.639 0 1.158.48 1.158 1.074v8.14zM12.714 0H3.286A3.286 3.286 0 0 0 0 3.286v9.429A3.286 3.286 0 0 0 3.286 16h9.428A3.286 3.286 0 0 0 16 12.715v-9.43A3.286 3.286 0 0 0 12.714 0z\" id=\"kaFill-1\"></path>\n" +
+                        "                                                                           </g>\n" +
+                        "                                                                       </svg>\n" ;
+                    var scrum="                                                                    <svg viewBox=\"0 0 16 16\"\n" +
+                        "                                                                         xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
+                        "                                                                         height=\"1em\" width=\"1em\"\n" +
+                        "                                                                         preserveAspectRatio=\"xMidYMid meet\"\n" +
+                        "                                                                         focusable=\"false\">\n" +
+                        "                                                                        <g id=\"omrd/scrum-fill\"\n" +
+                        "                                                                           stroke-width=\"1\"\n" +
+                        "                                                                           fill-rule=\"evenodd\">\n" +
+                        "                                                                            <path\n" +
+                        "                                                                                    d=\"M13.899 12.004l-1.136 1.114a.394.394 0 0 1-.559-.006l-.012-.012a.396.396 0 0 1 .005-.559l.397-.39H9.841l-.18-.001a4.17 4.17 0 0 0 1.459-.923H12.557l-.388-.396a.394.394 0 0 1 .005-.558l.013-.013a.395.395 0 0 1 .559.006l1.143 1.165.002.002.013.012a.396.396 0 0 1-.005.559m-5.73.146H2.461a.478.478 0 0 1-.479-.478c0-.288.233-.522.521-.522h3.023C4.655 10.4 4.09 9.304 4.09 8.067c0-1.053.401-2.054 1.128-2.818a.501.501 0 0 1 .725.69 3.072 3.072 0 0 0-.853 2.128 3.086 3.086 0 0 0 3.079 3.083h.004c1.7 0 3.082-1.382 3.082-3.083 0-1.7-1.382-3.083-3.082-3.083-.061 0-.122.016-.183.02l.448.482c.149.16.14.41-.02.558l-.014.013a.396.396 0 0 1-.558-.021L6.594 4.689a.396.396 0 0 1 .021-.559l.013-.012.002-.002 1.337-1.241c.16-.148.41-.14.558.021l.013.013a.396.396 0 0 1-.021.558l-.584.543c.08-.005.159-.026.24-.026a4.088 4.088 0 0 1 4.082 4.083 4.087 4.087 0 0 1-4.082 4.083h-.004M13.076 0H2.923A2.924 2.924 0 0 0 0 2.924v10.152A2.922 2.922 0 0 0 2.923 16h10.153A2.924 2.924 0 0 0 16 13.076V2.924A2.925 2.925 0 0 0 13.076 0\"\n" +
+                        "                                                                                    id=\"omFill-1\">\n" +
+                        "                                                                            </path>\n" +
+                        "                                                                        </g>\n" +
+                        "                                                                    </svg>";
+                    for(var i=0;i<result.items.length;i++){
+                        tr+=" <tr cdkdrag=\"\" class=\"thy-sortable-item cdk-drag cdk-drag-disabled\">\n" +
+                            "                                                            <td class=\"text-truncate\">\n" +
+                            "                                                               <span class=\"icon-text icon-text-sm text-truncate d-block\">\n" +
+                            "                                                                   <thy-icon class=\"thy-icon-kanban-square-fill thy-icon\" style=\"color: rgb(86, 171, 251);\">\n";
+                          tr+=result.items[i].template_type==="scrum"?scrum:kaban;
+                          tr+="                                                                   </thy-icon>\n" +
+                            "                                                                   <span>"+result.items[i].name+"</span>\n" +
+                            "                                                               </span>\n" +
+                            "                                                            </td>\n" +
+                            "                                                            <td class=\"text-truncate\">\n" +
+                            "                                                                <thy-avatar class=\"mw-100 align-middle d-flex dashboard-widget-avatar thy-avatar-24 thy-avatar\" thysize=\"24\">\n" +
+                            "                                                                    <span class=\"avatar-default\"  style=\"background-color:" + result.items[i].member.color + ";\">\n" +
+                            "                                                                        <div >"+result.items[i].member.cusName+"</div>\n" +
+                            "                                                                    </span>\n" +
+                            "                                                                    <div class=\"avatar-name\">"+result.items[i].member.cusName+"</div>\n" +
+                            "                                                                </thy-avatar>\n" +
+                            "                                                            </td>\n" +
+                            "                                                            <td class=\"text-truncate\">\n" +
+                            "                                                                <span>"+result.items[i].time+"</span >\n " +
+                            "                                                            </td>\n" +
+                            "                                                        </tr>";
+                    }
+                    $("#cdk-drop-list-3").html(tr);
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

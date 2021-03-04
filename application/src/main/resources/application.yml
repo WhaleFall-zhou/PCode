@@ -1,0 +1,32 @@
+server:
+  port: 8080
+  tomcat:
+    basedir: "./"
+    accesslog:
+      enabled: true
+      pattern: "%h %l %u %t %r %s %b %D"
+
+spring:
+  datasource:
+    druid:
+      comm:
+        url: jdbc:mysql://172.16.7.203:3306/PCode?useSSL=false&autoReconnect=true&characterEncoding=UTF-8
+        username: root
+        password: 123456
+
+  thymeleaf:
+    prefix:
+      classpath: /templates/
+      suffix: html
+      mode: LEGACYHTML5
+      encoding: UTF-8
+      content-type: text/html
+      cache: false
+
+pcode:
+    redis:
+      host: 172.16.7.203
+      port: 6379
+      password:
+      database: 0
+
