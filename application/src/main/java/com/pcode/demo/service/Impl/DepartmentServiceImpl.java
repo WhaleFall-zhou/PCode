@@ -1,12 +1,12 @@
-package com.pcode.application.service.Impl;
+package com.pcode.demo.service.Impl;
 
-import com.pcode.application.dao.DepartmentInfoDao;
-import com.pcode.application.dto.CusServiceInfo;
-import com.pcode.application.dto.DepartmentInfo;
-import com.pcode.application.dto.DepartmentVo;
-import com.pcode.application.dto.GeneralDto;
-import com.pcode.application.service.DepartmentService;
-import com.pcode.application.util.RandomUtil;
+import com.pcode.demo.dao.DepartmentInfoDao;
+import com.pcode.demo.dto.CusServiceInfo;
+import com.pcode.demo.dto.DepartmentInfo;
+import com.pcode.demo.dto.DepartmentVo;
+import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.service.DepartmentService;
+import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

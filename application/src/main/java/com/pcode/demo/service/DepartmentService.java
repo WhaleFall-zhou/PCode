@@ -1,7 +1,7 @@
-package com.pcode.application.service;
+package com.pcode.demo.service;
 
-import com.pcode.application.dto.DepartmentVo;
-import com.pcode.application.dto.GeneralDto;
+import com.pcode.demo.dto.DepartmentVo;
+import com.pcode.demo.dto.GeneralDto;
 
 public interface DepartmentService {
     GeneralDto<Object> departmentCreate(DepartmentVo departmentVo);

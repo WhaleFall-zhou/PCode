@@ -1,9 +1,9 @@
-package com.pcode.application.controller;
+package com.pcode.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pcode.application.dto.DepartmentVo;
-import com.pcode.application.dto.GeneralDto;
-import com.pcode.application.service.DepartmentService;
+import com.pcode.demo.dto.DepartmentVo;
+import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.service.DepartmentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

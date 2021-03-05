@@ -1,4 +1,4 @@
-package com.pcode.application.dto;
+package com.pcode.demo.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

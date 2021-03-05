@@ -1,7 +1,7 @@
-package com.pcode.application.dao;
+package com.pcode.demo.dao;
 
-import com.pcode.application.dto.CusServiceInfo;
-import com.pcode.application.dto.DepartmentInfo;
+import com.pcode.demo.dto.CusServiceInfo;
+import com.pcode.demo.dto.DepartmentInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;

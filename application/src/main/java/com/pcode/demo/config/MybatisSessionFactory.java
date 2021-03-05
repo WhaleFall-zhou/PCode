@@ -1,4 +1,4 @@
-package com.pcode.application.config;
+package com.pcode.demo.config;
 
 import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.SqlSessionFactory;

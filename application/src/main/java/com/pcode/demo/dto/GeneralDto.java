@@ -1,4 +1,4 @@
-package com.pcode.application.dto;
+package com.pcode.demo.dto;
 
 import java.util.ArrayList;
 import java.util.List;

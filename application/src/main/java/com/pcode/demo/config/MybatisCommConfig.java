@@ -1,4 +1,4 @@
-package com.pcode.application.config;
+package com.pcode.demo.config;
 
 import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
-import static com.pcode.application.config.MybatisSessionFactory.createSqlSessionFactory;
+import static com.pcode.demo.config.MybatisSessionFactory.createSqlSessionFactory;
 
 @Slf4j
 @Configuration
