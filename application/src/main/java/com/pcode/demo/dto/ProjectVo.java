@@ -1,4 +1,4 @@
-package com.pcode.application.dto;
+package com.pcode.demo.dto;
 
 public class ProjectVo {
     private String name;

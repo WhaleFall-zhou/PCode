@@ -1,4 +1,4 @@
-package com.pcode.application.redis;
+package com.pcode.demo.redis;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;

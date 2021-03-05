@@ -1,4 +1,4 @@
-package com.pcode.application.util;
+package com.pcode.demo.util;
 
 
 public class RandomUtil {

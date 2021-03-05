@@ -1,14 +1,14 @@
-package com.pcode.application.service.Impl;
+package com.pcode.demo.service.Impl;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pcode.application.dao.ProjectDao;
-import com.pcode.application.dao.UserInfoDao;
-import com.pcode.application.dto.CusServiceInfo;
-import com.pcode.application.dto.GeneralDto;
-import com.pcode.application.dto.ProjectInfo;
-import com.pcode.application.dto.ProjectVo;
-import com.pcode.application.service.ProjectService;
-import com.pcode.application.util.RandomUtil;
+import com.pcode.demo.dao.ProjectDao;
+import com.pcode.demo.dao.UserInfoDao;
+import com.pcode.demo.dto.CusServiceInfo;
+import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.dto.ProjectInfo;
+import com.pcode.demo.dto.ProjectVo;
+import com.pcode.demo.service.ProjectService;
+import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +20,7 @@ import javax.annotation.Resource;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service(value = "projectService")
@@ -32,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     private StringRedisTemplate redisTemplate;
     /*
-    * 创建一个项目，添加组员关系，并给创建者将项目id加入redis中(最近项目)
+    * 创建一个项目，添加组员关系，并给创建者将项目id加入redis中(最近项目)详情
     */
     @Override
     public GeneralDto addProject(ProjectVo projectVo) {
@@ -45,12 +46,6 @@ public class ProjectServiceImpl implements ProjectService {
         String projectId = RandomUtil.getRandomString(20);
         info.setId(projectId);
         projectDao.addProject(info);
-        if(StringUtils.isNotBlank(projectVo.getCusIds())){
-            String[] cusIds = projectVo.getCusIds().split(",");
-            ArrayList<String> cusIdlist = new ArrayList<>();
-            Collections.addAll(cusIdlist,cusIds);
-            projectDao.addCusIdInProject(cusIdlist,projectId);
-        }
         String key="recent_browse_lis:"+userId;
         ZSetOperations<String, String> zSet = redisTemplate.opsForZSet();
         Set<ZSetOperations.TypedTuple<String>> range = zSet.reverseRangeWithScores(key, 0, MAX_NUMBER - 1);
@@ -63,9 +58,11 @@ public class ProjectServiceImpl implements ProjectService {
         generalDto.setRetCode("000000");
         return generalDto;
     }
-
+    /*
+    * 查最近浏览数据
+    */
     @Override
-    public GeneralDto projectList() throws ParseException {
+    public GeneralDto recentProjectList() throws ParseException {
         GeneralDto<ProjectInfo<CusServiceInfo>> generalDto = new GeneralDto<>();
         String userId = redisTemplate.opsForValue().get("user");
         String key="recent_browse_lis:"+userId;
@@ -77,6 +74,9 @@ public class ProjectServiceImpl implements ProjectService {
         }
         if(list.size()>0){
             List<ProjectInfo<CusServiceInfo>> projects = projectDao.projectById(list);
+            for(ProjectInfo<CusServiceInfo>temp:projects){
+                temp.setNumber(temp.getTeam().split(",").length);
+            }
             generalDto.setItems(this.turnKey(projects));
         }
         generalDto.setRetCode("000000");
@@ -86,7 +86,8 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     /*
-    * 去重，限制存放最大个数，过期时间（未实现）
+    * 最近浏览数据放入redis中，
+    * 要求：数据去重，限制存放最大个数，过期时间（未实现）
     */
     @Override
     public GeneralDto enterProject(String projectId) throws ParseException {
@@ -108,6 +109,26 @@ public class ProjectServiceImpl implements ProjectService {
         generalDto.setRetMsg("操作成功");
         return generalDto;
     }
+
+    @Override
+    public GeneralDto projectList() throws ParseException {
+        GeneralDto<ProjectInfo<CusServiceInfo>> generalDto = new GeneralDto<>();
+        String userId = redisTemplate.opsForValue().get("user");
+        List<ProjectInfo> infoList = projectDao.getIdAneTeam();
+        List<String> projectIds = infoList.stream().filter(projectInfo -> projectInfo.getTeam().contains(userId)).map(ProjectInfo::getId).collect(Collectors.toList());
+        if(projectIds.size()>0){
+            List<ProjectInfo<CusServiceInfo>> projectInfoList = this.turnKey(projectDao.projectById(projectIds));
+            for (ProjectInfo<CusServiceInfo>temp:projectInfoList){
+                temp.setNumber(temp.getTeam().split(",").length);
+            }
+            log.info("projectList:{}",projectInfoList);
+            generalDto.setItems(projectInfoList);
+        }
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
+        return generalDto;
+    }
+
     public List<ProjectInfo<CusServiceInfo>> turnKey(List<ProjectInfo<CusServiceInfo>> project) throws ParseException {
         ArrayList<ProjectInfo<CusServiceInfo>> projectList= (ArrayList<ProjectInfo<CusServiceInfo>>) project;
         if(!projectList.isEmpty()){

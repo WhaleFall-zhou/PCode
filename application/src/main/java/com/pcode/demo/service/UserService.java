@@ -1,7 +1,7 @@
-package com.pcode.application.service;
+package com.pcode.demo.service;
 
-import com.pcode.application.dto.CustomerVo;
-import com.pcode.application.dto.GeneralDto;
+import com.pcode.demo.dto.CustomerVo;
+import com.pcode.demo.dto.GeneralDto;
 
 public interface UserService {
     GeneralDto<Object> login(CustomerVo customerVo)throws Exception;

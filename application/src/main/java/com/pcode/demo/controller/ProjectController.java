@@ -1,10 +1,10 @@
-package com.pcode.application.controller;
+package com.pcode.demo.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pcode.application.dto.GeneralDto;
-import com.pcode.application.dto.ProjectVo;
-import com.pcode.application.service.ProjectService;
-import com.pcode.application.util.JsonResponseUtil;
+import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.dto.ProjectVo;
+import com.pcode.demo.service.ProjectService;
+import com.pcode.demo.util.JsonResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,13 +37,13 @@ public class ProjectController {
     }
 
     /**
-     * 获取最近浏览项目,从redis中获取最近浏览项目id，再从数据库中查项目具体信息
+     * 1、获取最近浏览项目,从redis中获取最近浏览项目id，再从数据库中查项目具体信息
      */
-    @RequestMapping(value = "/projectList",method = RequestMethod.POST)
-    public void projectList(HttpServletRequest request,HttpServletResponse response){
+    @RequestMapping(value = "/recentProjectList",method = RequestMethod.POST)
+    public void recentProjectList(HttpServletRequest request,HttpServletResponse response){
         GeneralDto<Object> generalDto = new GeneralDto<>();
         try {
-            generalDto=projectService.projectList();
+            generalDto=projectService.recentProjectList();
         }catch (Exception e){
             log.error(e.getMessage(),e);
             generalDto.setRetCode("999999");
@@ -52,7 +52,21 @@ public class ProjectController {
         }
         JsonResponseUtil.write(response,generalDto);
     }
-
+    /*
+    *查当前用户所在的所有项目
+    */
+    @RequestMapping(value = "/projectList",method = RequestMethod.POST)
+    public void projectList(HttpServletRequest request,HttpServletResponse response){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= projectService.projectList();
+        }catch (Exception e){
+            log.error(e.getMessage(),e);
+            generalDto.setRetCode("999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
     /*
     * 点击进入项目，将该项目id存入redis中的recent_project(hash表)中
     *

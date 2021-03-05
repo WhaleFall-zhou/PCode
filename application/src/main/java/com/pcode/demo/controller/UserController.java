@@ -1,17 +1,19 @@
-package com.pcode.application.controller;
+package com.pcode.demo.controller;
 
-import com.pcode.application.service.UserService;
-import com.pcode.application.dto.CustomerVo;
-import com.pcode.application.dto.GeneralDto;
-import com.pcode.application.util.JsonResponseUtil;
+import com.pcode.demo.service.UserService;
+import com.pcode.demo.dto.CustomerVo;
+import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.util.JsonResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 @Slf4j
@@ -25,11 +27,10 @@ public class UserController {
         GeneralDto<Object> generalDto=new GeneralDto<>();
         try {
             generalDto= userService.login(customerVo);
-
         } catch (Exception e) {
             generalDto.setRetCode("999999");
             generalDto.setRetMsg("登录失败");
-            log.error(e.getMessage(),e);
+            log.error("serviceLogin:{}",e);
         }
         JsonResponseUtil.write(response,generalDto);
     }
@@ -42,7 +43,7 @@ public class UserController {
         }catch (Exception e){
             generalDto.setRetCode("999999");
             generalDto.setRetMsg("操作失败");
-            log.error(e.getMessage(),e);
+            log.error("getUserInfo:{}",e);
         }
       JsonResponseUtil.write(response,generalDto);
 

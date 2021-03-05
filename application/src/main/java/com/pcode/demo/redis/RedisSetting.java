@@ -1,4 +1,4 @@
-package com.pcode.application.redis;
+package com.pcode.demo.redis;
 
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;

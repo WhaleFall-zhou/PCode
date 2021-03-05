@@ -1,4 +1,5 @@
 var basePath = window.location.protocol + "//" + window.location.host;
+var user;
 console.log(basePath);
 $(document).ready(function (){
     $.ajax({
@@ -10,6 +11,7 @@ $(document).ready(function (){
             if(result.retCode=="000000"){
                 $("#user").append(result.item.cusName);
                 $("#user").parent().css("background-color",result.item.color);
+                user=result.item;
             }
         }
     });

@@ -1,4 +1,4 @@
-package com.pcode.application.dto;
+package com.pcode.demo.dto;
 
 public class ProjectInfo<T> {
     private String id;
@@ -7,11 +7,20 @@ public class ProjectInfo<T> {
     private String logo;
     private Long created_at;
     private String created_by;
-    private String tream;
+    private String team;
     private String template_type;
     private Long updated_at;
     private String updated_by;
     private String time;
+    private Integer number; //成员个数
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     private T member;
 
@@ -79,12 +88,12 @@ public class ProjectInfo<T> {
         this.created_by = created_by;
     }
 
-    public String getTream() {
-        return tream;
+    public String getTeam() {
+        return team;
     }
 
-    public void setTream(String tream) {
-        this.tream = tream;
+    public void setTeam(String team) {
+        this.team = team;
     }
 
     public String getTemplate_type() {

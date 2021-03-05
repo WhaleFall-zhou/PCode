@@ -1,6 +1,6 @@
-package com.pcode.application.dao;
+package com.pcode.demo.dao;
 
-import com.pcode.application.dto.CusServiceInfo;
+import com.pcode.demo.dto.CusServiceInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
