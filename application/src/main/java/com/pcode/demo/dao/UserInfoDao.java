@@ -1,6 +1,7 @@
 package com.pcode.demo.dao;
 
 import com.pcode.demo.dto.CusServiceInfo;
+import com.pcode.demo.dto.CustomerVo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -66,4 +67,15 @@ public interface UserInfoDao {
             @Result(property = "color",column = "color")
     })
     List<CusServiceInfo> getUserNameById(@Param("cusId")List<String> cusId);
+    @Select("select cus_id,cus_name,color from cus_info")
+    @Results({
+            @Result(property = "cusId",column = "cus_id"),
+            @Result(property = "cusName",column = "cus_name"),
+            @Result(property = "color",column = "color")
+    })
+    List<CusServiceInfo> getNumber();
+
+    @Insert("insert into cus_info (cus_id,cus_pwd,cus_name,phone_no,cus_email,create_cus_id,create_time)values" +
+            "(#{user.cusId},#{user.cusPwd},#{user.cusName},#{user.phoneNo},#{user.cusEmail},#{user.createCusId},#{user.createTime})")
+    int initUser(@Param("user")CusServiceInfo cusServiceInfo);
 }

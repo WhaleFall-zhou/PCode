@@ -9,4 +9,6 @@ public interface DepartmentService {
     GeneralDto<Object> addNumber(DepartmentVo departmentVo);
 
     GeneralDto<Object> updateNumberInfo(DepartmentVo departmentVo);
+
+    GeneralDto departmentList();
 }

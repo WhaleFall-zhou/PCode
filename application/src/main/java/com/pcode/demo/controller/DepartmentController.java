@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.pcode.demo.dto.DepartmentVo;
 import com.pcode.demo.dto.GeneralDto;
 import com.pcode.demo.service.DepartmentService;
+import com.pcode.demo.util.JsonResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,8 +23,7 @@ public class DepartmentController {
     DepartmentService departmentService;
 
     @RequestMapping(value = "/departmentCreate",method = RequestMethod.POST)
-    @ResponseBody
-    public GeneralDto departmentCreate(HttpServletRequest request, HttpServletResponse response, DepartmentVo departmentVo){
+    public void departmentCreate(HttpServletRequest request, HttpServletResponse response, DepartmentVo departmentVo){
         GeneralDto<Object> generalDto = new GeneralDto<>();
         log.info("departmentInsert:"+ JSONObject.toJSONString(departmentVo));
         try{
@@ -33,23 +33,13 @@ public class DepartmentController {
             generalDto.setRetCode("999999");
             generalDto.setRetMsg("操作失败");
         }
-        return generalDto;
+        JsonResponseUtil.write(response,generalDto);
     }
     /**
     * 添加成员
-     * @param cusName
-     * @param nickName
-     * @param sex
-     * @param phoneNo
-     * @param cusEmail
-     * @param createId
-     * @param createTime
-     * @param cusPwd
-     * @param position 
      * */
     @RequestMapping(value = "/addNumber",method = RequestMethod.POST)
-    @ResponseBody
-    public GeneralDto addNumber(HttpServletRequest request,HttpServletResponse response,DepartmentVo departmentVo){
+    public void addNumber(HttpServletRequest request,HttpServletResponse response,DepartmentVo departmentVo){
         log.info("addNumber:"+JSONObject.toJSONString(departmentVo));
         GeneralDto<Object> generalDto=null;
         try{
@@ -59,22 +49,15 @@ public class DepartmentController {
             generalDto.setRetMsg("999999");;
             generalDto.setRetMsg("操作失败");
         }
-        return generalDto;
+        JsonResponseUtil.write(response,generalDto);
 
     }
     /**
      * 操作成员信息
-     * @param cusName
-     * @param nickName
-     * @param phoneNo
-     * @param cusEmail
-     * @param updateCusId
-     * @param updateTime
-     * @param position
-     * @param sex
      * */
     @RequestMapping(value = "/updateNumberInfo",method = RequestMethod.POST)
-    public GeneralDto updateNumberInfo(HttpServletRequest request,HttpServletResponse response,DepartmentVo departmentVo){
+
+    public void updateNumberInfo(HttpServletRequest request,HttpServletResponse response,DepartmentVo departmentVo){
         log.info("updateNUmberInfo:"+JSONObject.toJSONString(departmentVo));
         GeneralDto<Object> generalDto=null;
         try{
@@ -84,6 +67,19 @@ public class DepartmentController {
             generalDto.setRetCode("999999");
             generalDto.setRetMsg("操作失败");
         }
-        return generalDto;
+        JsonResponseUtil.write(response,generalDto);
+    }
+
+    @RequestMapping(value = "/departmentList",method = RequestMethod.POST)
+    public void departmentList(HttpServletRequest request,HttpServletResponse response){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto=departmentService.departmentList();
+        }catch (Exception e){
+            log.error("departmentList:{}",e);
+            generalDto.setRetMsg("操作失败");
+            generalDto.setRetCode("999999");
+        }
+        JsonResponseUtil.write(response,generalDto);
     }
 }

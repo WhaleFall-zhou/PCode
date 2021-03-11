@@ -6,4 +6,6 @@ import com.pcode.demo.dto.GeneralDto;
 public interface UserService {
     GeneralDto<Object> login(CustomerVo customerVo)throws Exception;
     GeneralDto<Object> getUserInfo();
+    GeneralDto userList();
+    GeneralDto init(CustomerVo customerVo);
 }

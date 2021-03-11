@@ -77,10 +77,21 @@ public class ProjectController {
         try {
            generalDto= projectService.enterProject(projectId);
         }catch (Exception e){
-            log.info(e.getMessage(),e);
+            log.error("enterProject:{}",e);
             generalDto.setRetCode("999999");
             generalDto.setRetMsg("操作成功");
         }
         JsonResponseUtil.write(response,generalDto);
+    }
+    @RequestMapping(value = "/itemList/backLog",method = RequestMethod.GET)
+    public void itemListBackLog(HttpServletRequest request,HttpServletResponse response,String browseId,Integer pageSize,Integer pageNo){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= projectService.itemListBackLog(browseId,pageSize,pageNo);
+        }catch (Exception e){
+            log.error("itemList:{}",e);
+            generalDto.setRetMsg("操作失败");
+            generalDto.setRetCode("000000");
+        }
     }
 }

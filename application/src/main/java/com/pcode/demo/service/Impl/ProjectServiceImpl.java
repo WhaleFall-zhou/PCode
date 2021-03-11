@@ -3,14 +3,12 @@ package com.pcode.demo.service.Impl;
 import com.alibaba.fastjson.JSONObject;
 import com.pcode.demo.dao.ProjectDao;
 import com.pcode.demo.dao.UserInfoDao;
-import com.pcode.demo.dto.CusServiceInfo;
-import com.pcode.demo.dto.GeneralDto;
-import com.pcode.demo.dto.ProjectInfo;
-import com.pcode.demo.dto.ProjectVo;
+import com.pcode.demo.dto.*;
 import com.pcode.demo.service.ProjectService;
+import com.pcode.demo.util.ParemeterUstil;
 import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
@@ -124,6 +122,50 @@ public class ProjectServiceImpl implements ProjectService {
             log.info("projectList:{}",projectInfoList);
             generalDto.setItems(projectInfoList);
         }
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto itemListBackLog(String browseId,Integer pageSize,Integer pageNo) {
+        GeneralDto<ItemInfo<CusServiceInfo>> generalDto = new GeneralDto<>();
+        ArrayList<ItemInfo<CusServiceInfo>> itemInfos = projectDao.itemListBackLog(browseId);
+        if(!itemInfos.isEmpty()){
+            List<String> ids = itemInfos.stream().filter(cusService -> {
+                return Strings.isNotEmpty(cusService.getPrincipal_id());
+            }).map(ItemInfo::getPrincipal_id).collect(Collectors.toList());
+            log.info("itemListBackLog: ids:{}",ids);
+            if(!ids.isEmpty()){
+                List<CusServiceInfo> userInfo = userInfoDao1.getUserNameById(ids);
+                log.info("itemListBackLog userInfo:{}",userInfo);
+                for(ItemInfo<CusServiceInfo> var1:itemInfos){
+                    for (CusServiceInfo var2:userInfo){
+                        if (var2.getCusId().equals(var1.getPrincipal_id())){
+                            var1.setPrincipal(var2);
+                            var1.setStartTime(new SimpleDateFormat("yyyy年MM月dd日").format(new Date(var1.getStart_time())));
+                            var1.setEndTime(new SimpleDateFormat("yyyy年MM月dd日").format(new Date(var1.getEnd_time())));
+                            List<String> participants = Arrays.asList(var1.getParticipant().split(","));
+                            var1.setParticipantList(userInfoDao1.getUserNameById(participants));
+                        }
+                    }
+                }
+            }
+        }
+        generalDto.setItems(ParemeterUstil.getPaging(pageNo,pageSize,itemInfos));
+        int totalCount = itemInfos.size();
+        generalDto.setTotalCount(totalCount);
+        if (0 == totalCount) {
+            generalDto.setPageCount(0);
+        } else {
+            if (0 == (totalCount % pageSize)) {
+                generalDto.setPageCount((int) (totalCount / pageSize));
+            } else {
+                generalDto.setPageCount((int) (totalCount / pageSize) + 1);
+            }
+        }
+        generalDto.setPageSize(pageSize);
+        generalDto.setPageNo(pageNo);
         generalDto.setRetCode("000000");
         generalDto.setRetMsg("操作成功");
         return generalDto;

@@ -979,7 +979,7 @@
                         "                                                                        </g>\n" +
                         "                                                                    </svg>";
                     for(var i=0;i<result.items.length;i++){
-                        tr+=" <tr cdkdrag=\"\" class=\"thy-sortable-item cdk-drag cdk-drag-disabled\">\n" +
+                        tr+=" <tr cdkdrag=\""+result.items[i].id+"\" class=\"thy-sortable-item cdk-drag cdk-drag-disabled\">\n" +
                             "                                                            <td class=\"text-truncate\">\n" +
                             "                                                               <span class=\"icon-text icon-text-sm text-truncate d-block\">\n" +
                             "                                                                   <thy-icon class=\"thy-icon-kanban-square-fill thy-icon\" style=\"color: rgb(86, 171, 251);\">\n";

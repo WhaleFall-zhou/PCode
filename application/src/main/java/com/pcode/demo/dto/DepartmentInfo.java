@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 public class DepartmentInfo {
     private String departId;
     private String departName;
-    private Integer departLevel;
     private String parentId;
     private String departLevelNo;
     private Integer sourceNo;

@@ -13,7 +13,6 @@ public class DepartmentVo {
     private Long changeTime;//改变时间
     private String changeId;//改变id
     private String departNamePinying;//部门名拼音形式
-
     private String cusName;
     private String cusId;
     private String nickName;

@@ -9,6 +9,33 @@ public class CustomerVo {
     private String cusEmail;
     private String randomKey;
     private String randomCode;
+    private String departId;
+    private Integer sex;
+    private String position;
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public String getDepartId() {
+        return departId;
+    }
+
+    public void setDepartId(String departId) {
+        this.departId = departId;
+    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
 
     public String getUserName() {
         return userName;

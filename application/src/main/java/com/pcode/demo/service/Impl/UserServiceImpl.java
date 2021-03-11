@@ -5,11 +5,14 @@ import com.pcode.demo.service.UserService;
 import com.pcode.demo.dto.CusServiceInfo;
 import com.pcode.demo.dto.CustomerVo;
 import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -51,6 +54,40 @@ public class UserServiceImpl implements UserService {
         generalDto.setItem(userInfo);
         generalDto.setRetCode("000000");
         generalDto.setRetMsg("操作成功");
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto userList() {
+        GeneralDto<CusServiceInfo> generalDto = new GeneralDto<>();
+        List<CusServiceInfo> number = userInfoDao.getNumber();
+        if(!number.isEmpty()){
+            generalDto.setItems(number);
+            generalDto.setRetCode("000000");
+            generalDto.setRetMsg("操作成功");
+        }
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto init(CustomerVo customerVo) {
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        CusServiceInfo cusServiceInfo = new CusServiceInfo();
+        cusServiceInfo.setCusName(customerVo.getUserName());
+        cusServiceInfo.setCusEmail(customerVo.getCusEmail());
+        cusServiceInfo.setPhoneNo(customerVo.getPhoneNo());
+        cusServiceInfo.setCusPwd(customerVo.getPassWord());
+        cusServiceInfo.setCreateTime(System.currentTimeMillis());
+        cusServiceInfo.setCreateCusId(redisTemplate.opsForValue().get("user"));
+        cusServiceInfo.setCusId(RandomUtil.getRandomString(12));
+        cusServiceInfo.setSex(customerVo.getSex());
+        cusServiceInfo.setDepartId(customerVo.getDepartId());
+        cusServiceInfo.setPosition(cusServiceInfo.getPosition());
+        int i = userInfoDao.initUser(cusServiceInfo);
+        if (i>0){
+            generalDto.setRetCode("000000");
+            generalDto.setRetMsg("操作成功");
+        }
         return generalDto;
     }
 }

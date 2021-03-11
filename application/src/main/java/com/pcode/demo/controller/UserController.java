@@ -48,4 +48,29 @@ public class UserController {
       JsonResponseUtil.write(response,generalDto);
 
     }
+
+    @RequestMapping(value = "/userList",method = RequestMethod.POST)
+    public void userList(HttpServletRequest request,HttpServletResponse response){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try{
+            generalDto=userService.userList();
+        }catch (Exception e){
+            generalDto.setRetCode("999999");
+            generalDto.setRetMsg("操作失败");
+            log.error("userList:{}",e);
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
+    @RequestMapping(value = "/init",method = RequestMethod.POST)
+    public void initUser(HttpServletRequest request,HttpServletResponse response,CustomerVo customerVo){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= userService.init(customerVo);
+        }catch (Exception e){
+            log.error("initUser:{}",e);
+            generalDto.setRetCode("9999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
 }

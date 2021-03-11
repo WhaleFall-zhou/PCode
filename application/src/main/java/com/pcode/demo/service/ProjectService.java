@@ -10,4 +10,5 @@ public interface ProjectService {
     GeneralDto recentProjectList() throws ParseException;
     GeneralDto enterProject(String projectId) throws ParseException;
     GeneralDto projectList() throws ParseException;
+    GeneralDto itemListBackLog(String browseId,Integer pageSize,Integer pageNO);
 }
