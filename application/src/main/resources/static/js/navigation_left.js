@@ -9,7 +9,7 @@ $(document).ready(function (){
         type:"POST",
         success:function (result){
             if(result.retCode=="000000"){
-                $("#user").append(result.item.cusName);
+                $("#user").append(result.item.nickName);
                 $("#user").parent().css("background-color",result.item.color);
                 user=result.item;
             }

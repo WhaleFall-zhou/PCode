@@ -11,4 +11,6 @@ public interface DepartmentService {
     GeneralDto<Object> updateNumberInfo(DepartmentVo departmentVo);
 
     GeneralDto departmentList();
+
+    GeneralDto memberInDepartment(String departId);
 }

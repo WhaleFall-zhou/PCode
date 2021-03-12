@@ -82,4 +82,19 @@ public class DepartmentController {
         }
         JsonResponseUtil.write(response,generalDto);
     }
+    /*
+    * 部门的成员
+    */
+    @RequestMapping(value = "/memberInDepartment",method = RequestMethod.POST)
+    public void memberInDepartment(HttpServletRequest request,HttpServletResponse response,String departId){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto=departmentService.memberInDepartment(departId);
+        }catch (Exception e){
+            log.error("memberInDepartment:{}",e);
+            generalDto.setRetCode("999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
 }

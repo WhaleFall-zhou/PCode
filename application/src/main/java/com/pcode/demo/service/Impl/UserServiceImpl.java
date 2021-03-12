@@ -26,14 +26,7 @@ public class UserServiceImpl implements UserService {
     private StringRedisTemplate redisTemplate;
 
     public GeneralDto<Object> login(CustomerVo customerVo) throws Exception {
-        Pattern pattern = Pattern.compile("^1[3|4|5|8][0-9]\\d{8}$");
-        Matcher matcher = pattern.matcher(customerVo.getUserName());
-        CusServiceInfo cusInfo =new CusServiceInfo();
-        if(matcher.find()==true){
-            cusInfo=userInfoDao.getPassWordById(customerVo.getUserName());
-        }else {
-            cusInfo= userInfoDao.getPassWordByEmail(customerVo.getUserName());
-        }
+        CusServiceInfo cusInfo = userInfoDao.getPassWordByName(customerVo.getUserName());
         GeneralDto<Object> generalDto = new GeneralDto<>();
         if(cusInfo.getCusPwd()!=null&&cusInfo.getCusId()!=null) {
             if (cusInfo.getCusPwd().equals(customerVo.getPassWord())) {
@@ -50,7 +43,7 @@ public class UserServiceImpl implements UserService {
     public GeneralDto<Object> getUserInfo() {
         GeneralDto<Object> generalDto = new GeneralDto<>();
         String userId = redisTemplate.opsForValue().get("user");
-        CusServiceInfo userInfo = userInfoDao.getUserImfo(userId);
+        CusServiceInfo userInfo = userInfoDao.getUserInfo(userId);
         generalDto.setItem(userInfo);
         generalDto.setRetCode("000000");
         generalDto.setRetMsg("操作成功");
@@ -88,6 +81,25 @@ public class UserServiceImpl implements UserService {
             generalDto.setRetCode("000000");
             generalDto.setRetMsg("操作成功");
         }
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto deleteMember(String cusId) {
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        int i = userInfoDao.deleteById(cusId);
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto remove(String cusIds, String departId) {
+        List<String> ids = Arrays.asList(cusIds.split(","));
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        int i = userInfoDao.remove(ids,departId);
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
         return generalDto;
     }
 }

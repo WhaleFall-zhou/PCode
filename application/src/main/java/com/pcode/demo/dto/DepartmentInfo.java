@@ -16,4 +16,5 @@ public class DepartmentInfo {
     private Long updateTime;
     private String updateId;
     private String departNamePingying;
+    private Integer number;
 }

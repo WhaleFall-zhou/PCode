@@ -8,4 +8,6 @@ public interface UserService {
     GeneralDto<Object> getUserInfo();
     GeneralDto userList();
     GeneralDto init(CustomerVo customerVo);
+    GeneralDto deleteMember(String cusId);
+    GeneralDto remove(String cusIds,String departId);
 }

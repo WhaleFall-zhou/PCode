@@ -23,4 +23,8 @@ public class URLController {
     public String admin(){return "admin";}
     @RequestMapping("/agile")
     public String agile(){return "Agile";}
+    @RequestMapping("/detail")
+    public String detail(){
+        return "detail";
+    }
 }

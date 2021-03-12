@@ -1,21 +1,20 @@
 package com.pcode.demo.service.Impl;
 
 import com.pcode.demo.dao.DepartmentInfoDao;
-import com.pcode.demo.dto.CusServiceInfo;
-import com.pcode.demo.dto.DepartmentInfo;
-import com.pcode.demo.dto.DepartmentVo;
-import com.pcode.demo.dto.GeneralDto;
+import com.pcode.demo.dto.*;
 import com.pcode.demo.service.DepartmentService;
 import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
+import java.util.Comparator;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service(value = "departmentService")
@@ -48,18 +47,29 @@ public class DepartmentServiceImpl implements DepartmentService {
         GeneralDto<Object> generalDto = new GeneralDto<>();
         CusServiceInfo cusServiceInfo = new CusServiceInfo();
         cusServiceInfo.setCusName(departmentVo.getCusName());
-        if(departmentVo.getCusEmail().length()>0){
-            cusServiceInfo.setCusEmail(departmentVo.getCusEmail());
-        }
-        if(departmentVo.getPhoneNo().length()>0){
-            cusServiceInfo.setPhoneNo(departmentVo.getPhoneNo());
+        Pattern pattern = Pattern.compile("^1[3|4|5|8][0-9]\\d{8}$");
+        Matcher matcher = pattern.matcher(departmentVo.getConnection());
+        if (matcher.find()){
+            cusServiceInfo.setPhoneNo(departmentVo.getConnection());
+        }else {
+            cusServiceInfo.setCusEmail(departmentVo.getConnection());
         }
         cusServiceInfo.setCusId(RandomUtil.getRandomString(12));
-        cusServiceInfo.setDepartId(departmentVo.getDepartId());
-        cusServiceInfo.setSex(departmentVo.getSex());
+        if(!departmentVo.getDepartId().isEmpty()) {
+            cusServiceInfo.setDepartId(departmentVo.getDepartId());
+        }
+        if(!departmentVo.getSex().isEmpty()) {
+            cusServiceInfo.setSex(departmentVo.getSex());
+        }
+        if(!departmentVo.getPosition().isEmpty()){
+            cusServiceInfo.setPosition(departmentVo.getPosition());
+        }
         cusServiceInfo.setCusPwd(departmentVo.getCusPwd());
-        cusServiceInfo.setCreateCusId(departmentVo.getCusId());
-        cusServiceInfo.setCreateTime(departmentVo.getCreateTime());
+        cusServiceInfo.setCreateCusId(redisTemplate.opsForValue().get("user"));
+        cusServiceInfo.setCreateTime(System.currentTimeMillis());
+        cusServiceInfo.setNickName(departmentVo.getNickName());
+        cusServiceInfo.setColor(Color.randomColor(Color.values()).value);
+        log.info("addNumber -> cusServiceInfo:{}",cusServiceInfo);
         Integer result = departmentInfoDao.addNumber(cusServiceInfo);
         if(result>0){
             generalDto.setRetCode("000000");
@@ -101,9 +111,33 @@ public class DepartmentServiceImpl implements DepartmentService {
     public GeneralDto departmentList() {
         GeneralDto<DepartmentInfo> generalDto = new GeneralDto<>();
         List<DepartmentInfo> departmentList = departmentInfoDao.departmentList();
-        generalDto.setItems(departmentList);
+        List<CusServiceInfo> member = departmentInfoDao.getNemberInDepartment();
+        for(DepartmentInfo var1:departmentList){
+            for (CusServiceInfo var2 : member) {
+                if (var1.getDepartId().equals(var2.getDepartId())) {
+                    var1.setNumber(var2.getNumber());
+                }
+            }
+            if(var1.getNumber()==null){
+                var1.setNumber(0);
+            }
+        }
+        log.info("departmentIndo:{}",departmentList);
+        generalDto.setItems(departmentList.stream().sorted(Comparator.comparing(DepartmentInfo::getNumber).reversed()).collect(Collectors.toList()));
         generalDto.setRetMsg("操作成功");
         generalDto.setRetCode("000000");
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto memberInDepartment(String departId) {
+        GeneralDto<CusServiceInfo> generalDto = new GeneralDto<>();
+        List<CusServiceInfo> member = departmentInfoDao.getAllMemberInDepartment(departId);
+        if (!member.isEmpty()){
+            generalDto.setItems(member);
+        }
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
         return generalDto;
     }
 

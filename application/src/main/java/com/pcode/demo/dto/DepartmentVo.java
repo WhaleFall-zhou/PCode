@@ -16,9 +16,10 @@ public class DepartmentVo {
     private String cusName;
     private String cusId;
     private String nickName;
-    private Integer sex;
+    private String sex;
     private String phoneNo;
     private String cusEmail;
+    private String connection;
     private String createId;
     private Long createTime;
     private String cusPwd;

@@ -73,4 +73,30 @@ public class UserController {
         }
         JsonResponseUtil.write(response,generalDto);
     }
+    //删除成员
+    @RequestMapping(value = "/deleteMember",method = RequestMethod.POST)
+    public void deleteMember(HttpServletRequest request,HttpServletResponse response,String cusId){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= userService.deleteMember(cusId);
+        }catch (Exception e){
+            log.error("initUser:{}",e);
+            generalDto.setRetCode("9999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
+    //移动成员
+    @RequestMapping(value = "/remove",method = RequestMethod.POST)
+    public void remove(HttpServletRequest request,HttpServletResponse response,String cusIds,String departId){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= userService.remove(cusIds, departId);
+        }catch (Exception e){
+            log.error("initUser:{}",e);
+            generalDto.setRetCode("9999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
 }

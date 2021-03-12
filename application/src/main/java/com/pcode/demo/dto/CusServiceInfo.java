@@ -17,7 +17,7 @@ public class CusServiceInfo {
     private Long createTime;//创建时间
     private String updateCusId;//更新人
     private Long updateTime;//更新时间
-    private Integer sex;//性别 0：女  1：男
+    private String sex;//性别 0：女  1：男
     private String nickName;//成员名称
     private String loginIp;
     private Long loginTime;//登录时间
@@ -30,4 +30,5 @@ public class CusServiceInfo {
     private Integer auditTickerDocFlag;//正对管理员，是否可审核知识库，0可审核（默认），1不可审核（可审核时只针对管理员）
     private Integer pwdType;//密码类型 0 重置密码  1 非重置密码
 
+    private Integer number;
 }

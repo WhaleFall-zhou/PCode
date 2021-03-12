@@ -10,7 +10,7 @@ public class CustomerVo {
     private String randomKey;
     private String randomCode;
     private String departId;
-    private Integer sex;
+    private String sex;
     private String position;
 
     public String getPosition() {
@@ -29,11 +29,11 @@ public class CustomerVo {
         this.departId = departId;
     }
 
-    public Integer getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Integer sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
