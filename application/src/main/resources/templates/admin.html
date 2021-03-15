@@ -2,9 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
     <title>后台管理</title>
-    <base href=".">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link id="favicon" rel="icon" type="image/x-icon" href="./pic/favicon.ico">
     <link rel="stylesheet" href="./css/styles.05f60c9bcfb3a61042b5.css">
@@ -1454,7 +1452,6 @@
 
     function member(id) {
         var memberlength=$("#admins").find(".text-truncate div").length;
-        console.log("length:"+memberlength)
         var departName="";
         for(var j=0;j<departList.length;j++){
             if(departList[j].departId===id){
@@ -1591,7 +1588,7 @@
             "                    </button>\n" +
             "                    </thy-dialog-header>\n" +
             "                    <thy-dialog-body class=\"thy-form dialog-body\">\n" +
-            "                        <form name=\"thyConfirm\" novalidate=\"\" thyform=\"\" thylayout=\"vertical\" class=\"thy-form thy-form-vertical ng-untouched ng-pristine ng-valid\">\n" +
+            "                        <form name=\"thyConfirm\" novalidate=\"\" method='post' action='/delete' class=\"thy-form thy-form-vertical ng-untouched ng-pristine ng-valid\">\n" +
             "                            <div class=\"form-group\">\n" +
             "                                <p>你确定要禁用所选中的成员吗？</p>\n" +
             "                            </div>\n" +
@@ -1599,7 +1596,7 @@
             "                                <div class=\"form-group-footer form-group-footer-align-right\">\n" +
             "                                    <div class=\"btn-pair form-footer-actions\">\n" +
             "                                        <div class=\"thy-confirm-footer thy-confirm-footer-right\">\n" +
-            "                                            <button class=\"btn btn-danger\" onclick=\"deleteNumber("+id+")\">确认 </button>\n" +
+            "                                            <button class=\"btn btn-danger\"  name=\"cusId\" value=\""+id+"\" \">确认 </button>\n" +
             "                                            <button class=\"thy-confirm-cancel btn btn-link btn-link-primary-weak\" thybutton=\"link-secondary\" onclick=\"clean('cdk-overlay-containercdk-overlay-container','class')\" >取消</button>\n" +
             "                                        </div>\n" +
             "                                    </div>\n" +
@@ -1613,25 +1610,6 @@
             "        </div>\n" +
             "    </div>";
         $(".cdk-overlay-container").html(delete_card);
-
-    }
-    function deleteNumber(id) {
-        $.ajax({
-            url:basePath+"deleteMember",
-            dataType:"JSON",
-            type:"POST",
-            data:{"cusId":id},
-            async:false,
-            cache:false,
-            success:function (result){
-                if(result.retCode==="000000"){
-                    window.alert("删除成功");
-                }
-            },
-            error:function (){
-                window.alert("删除失败");
-            }
-        });
 
     }
 </script>

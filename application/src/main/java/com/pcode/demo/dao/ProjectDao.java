@@ -1,6 +1,7 @@
 package com.pcode.demo.dao;
 
 import com.pcode.demo.dto.CusServiceInfo;
+import com.pcode.demo.dto.ItemDictionaryInfo;
 import com.pcode.demo.dto.ItemInfo;
 import com.pcode.demo.dto.ProjectInfo;
 import org.apache.ibatis.annotations.*;
@@ -47,5 +48,6 @@ public interface ProjectDao {
     @Select("select * from item where browse_id=#{browse_id} AND type in (1,2,4)")
     ArrayList<ItemInfo<CusServiceInfo>> itemListBackLog(@Param("browse_id")String browseId);
 
-
+    @Select("select * from item_dictionary where id=#{type}")
+    ItemDictionaryInfo getItemByType(@Param("type") Integer type);
 }

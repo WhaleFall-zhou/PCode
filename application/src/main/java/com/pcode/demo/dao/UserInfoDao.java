@@ -68,7 +68,7 @@ public interface UserInfoDao {
             "(#{user.cusId},#{user.cusPwd},#{user.cusName},#{user.phoneNo},#{user.cusEmail},#{user.createCusId},#{user.createTime})")
     int initUser(@Param("user")CusServiceInfo cusServiceInfo);
 
-    @Delete("delete from cus_info where cus_id=#{cudId}")
+    @Delete("delete from cus_info where cus_id=#{cusId}")
     int deleteById(@Param("cusId")String cusId);
 
     @Update("<script>" +

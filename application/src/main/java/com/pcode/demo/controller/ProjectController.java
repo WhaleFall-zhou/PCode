@@ -8,6 +8,7 @@ import com.pcode.demo.util.JsonResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -83,8 +84,8 @@ public class ProjectController {
         }
         JsonResponseUtil.write(response,generalDto);
     }
-    @RequestMapping(value = "/itemList/backLog",method = RequestMethod.GET)
-    public void itemListBackLog(HttpServletRequest request,HttpServletResponse response,String browseId,Integer pageSize,Integer pageNo){
+    @RequestMapping(value = "/itemList/backLog",method = RequestMethod.POST)
+    public String itemListBackLog(HttpServletRequest request, HttpServletResponse response, String browseId, Integer pageSize, Integer pageNo, Model model){
         GeneralDto<Object> generalDto = new GeneralDto<>();
         try {
             generalDto= projectService.itemListBackLog(browseId,pageSize,pageNo);
@@ -93,5 +94,23 @@ public class ProjectController {
             generalDto.setRetMsg("操作失败");
             generalDto.setRetCode("000000");
         }
+        model.addAttribute("generalDto",generalDto);
+        return "detail";
+    }
+
+    /*
+    * 创建工作项，查工作项内的详情
+    */
+    @RequestMapping(value = "/createItem",method = RequestMethod.POST)
+    public void createItem(HttpServletRequest request,HttpServletResponse response,Integer type){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= projectService.createItem(type);
+        }catch (Exception e){
+            log.error("enterProject:{}",e);
+            generalDto.setRetCode("999999");
+            generalDto.setRetMsg("操作成功");
+        }
+        JsonResponseUtil.write(response,generalDto);
     }
 }

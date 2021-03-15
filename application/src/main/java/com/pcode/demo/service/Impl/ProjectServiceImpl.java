@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Service(value = "projectService")
 public class ProjectServiceImpl implements ProjectService {
-    final static int MAX_NUMBER=5;
+     static int MAX_NUMBER=5;
     @Resource
     ProjectDao projectDao;
     @Resource
@@ -166,6 +166,16 @@ public class ProjectServiceImpl implements ProjectService {
         }
         generalDto.setPageSize(pageSize);
         generalDto.setPageNo(pageNo);
+        generalDto.setRetCode("000000");
+        generalDto.setRetMsg("操作成功");
+        return generalDto;
+    }
+
+    @Override
+    public GeneralDto createItem(Integer type) {
+        GeneralDto<ItemDictionaryInfo> generalDto = new GeneralDto<>();
+        ItemDictionaryInfo item = projectDao.getItemByType(type);
+        generalDto.setItem(item);
         generalDto.setRetCode("000000");
         generalDto.setRetMsg("操作成功");
         return generalDto;

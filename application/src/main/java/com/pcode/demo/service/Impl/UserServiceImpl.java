@@ -87,6 +87,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public GeneralDto deleteMember(String cusId) {
         GeneralDto<Object> generalDto = new GeneralDto<>();
+        log.info("userServiceImpl -> cusId:{}",cusId);
         int i = userInfoDao.deleteById(cusId);
         generalDto.setRetCode("000000");
         generalDto.setRetMsg("操作成功");

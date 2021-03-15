@@ -225,4 +225,10 @@ $("#new").click(function (){
     }
 });
 
+function creatItem(type) {
+    $.ajax({
+        url: basePath+""
+    });
+}
+
 

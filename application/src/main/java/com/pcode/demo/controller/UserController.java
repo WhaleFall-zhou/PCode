@@ -74,17 +74,17 @@ public class UserController {
         JsonResponseUtil.write(response,generalDto);
     }
     //删除成员
-    @RequestMapping(value = "/deleteMember",method = RequestMethod.POST)
-    public void deleteMember(HttpServletRequest request,HttpServletResponse response,String cusId){
+    @RequestMapping(value = "/delete",method = RequestMethod.POST)
+    public String deleteMember(HttpServletRequest request,HttpServletResponse response,String cusId){
         GeneralDto<Object> generalDto = new GeneralDto<>();
         try {
             generalDto= userService.deleteMember(cusId);
         }catch (Exception e){
-            log.error("initUser:{}",e);
+            log.error("deleteMember:{}",e);
             generalDto.setRetCode("9999999");
             generalDto.setRetMsg("操作失败");
         }
-        JsonResponseUtil.write(response,generalDto);
+        return "/admin";
     }
     //移动成员
     @RequestMapping(value = "/remove",method = RequestMethod.POST)
