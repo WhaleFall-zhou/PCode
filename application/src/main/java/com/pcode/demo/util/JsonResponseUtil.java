@@ -2,6 +2,7 @@ package com.pcode.demo.util;
 
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.log4j.Logger;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +17,7 @@ public class JsonResponseUtil {
     }
 
     public static void write(HttpServletResponse response,Object obj){
-        String str= JSON.toJSONString(obj);
+        String str= JSON.toJSONString(obj, SerializerFeature.DisableCircularReferenceDetect);
         response.setContentType("application/json;charset=utf-8");
         doResponse(response, str);
     }

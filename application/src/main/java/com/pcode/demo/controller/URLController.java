@@ -1,6 +1,8 @@
 package com.pcode.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /*视图跳转控制器*/
@@ -23,8 +25,9 @@ public class URLController {
     public String admin(){return "admin";}
     @RequestMapping("/agile")
     public String agile(){return "Agile";}
-//    @RequestMapping("/detail")
-//    public String detail(){
-//        return "detail";
-//    }
+    @RequestMapping("/detail/{browesId}")
+    public String detail(@PathVariable String browesId, Model model){
+        model.addAttribute("browseId",browesId);
+        return "detail";
+    }
 }

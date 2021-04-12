@@ -3,7 +3,6 @@ package com.pcode.demo.service.Impl;
 import com.pcode.demo.dao.DepartmentInfoDao;
 import com.pcode.demo.dto.*;
 import com.pcode.demo.service.DepartmentService;
-import com.pcode.demo.util.RandomUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.elasticsearch.common.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -31,7 +31,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentInfo.setCreateTime(System.currentTimeMillis());
         departmentInfo.setDepartName(departmentVo.getDepartName());
         departmentInfo.setParentId(departmentVo.getParentId());
-        departmentInfo.setDepartId(RandomUtil.getRandomString(14));
+        departmentInfo.setDepartId(UUID.randomUUID().toString());
         DepartmentInfo parent = departmentInfoDao.getDetailById(departmentVo.getParentId());
         departmentInfo.setDepartLevelNo(Strings.isEmpty(parent.getDepartLevelNo())?parent.getDepartId():parent.getDepartLevelNo().concat("|"+parent.getDepartId()));
         Integer result = departmentInfoDao.insertDepartment(departmentInfo);
@@ -54,7 +54,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         }else {
             cusServiceInfo.setCusEmail(departmentVo.getConnection());
         }
-        cusServiceInfo.setCusId(RandomUtil.getRandomString(12));
+        cusServiceInfo.setCusId(UUID.randomUUID().toString());
         if(!departmentVo.getDepartId().isEmpty()) {
             cusServiceInfo.setDepartId(departmentVo.getDepartId());
         }

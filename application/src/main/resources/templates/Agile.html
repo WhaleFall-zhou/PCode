@@ -201,7 +201,7 @@
 <app-portal-root ng-version="9.1.13">
     <router-outlet></router-outlet>
     <app-portal-actual-root wt-version="2.32.0" class="thy-layout thy-layout--has-sidebar">
-        <!---->
+         
         <thy-sidebar class="app-nav-sidebar thy-layout-sidebar">
             <app-nav class="app-nav-area">
                 <div class="top-area"><a class="team-logo" href="javascript:;">
@@ -263,10 +263,10 @@
                                 </span>
                             </a>
                         </li>
-                        <li thytooltip="通知" thytooltipplacement="right">
+                        <li thytooltip="通知" thytooltipplacement="right" onclick="oppenAdvice(this)">
                             <a class="app-item" href="javascript:;">
                                 <span class="item-icon">
-                                    <thy-badge class="icon-badge thy-badge-container">
+                                    <thy-badge class="icon-badge thy-badge-container advice">
                                         <thy-icon thyiconname="bell" class="thy-icon-bell thy-icon">
                                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
                                                 <g id="dlnormal/bell" stroke-width="1" fill-rule="evenodd">
@@ -350,18 +350,18 @@
                     <agile-global class="thy-layout">
                         <styx-application-header class="thy-layout-header header-has-border styx-primary-nav-container">
                             <div class="layout-header-title">
-                                <!----><span class="prefix-icon">
-											<!---->
-                                <!----><img class="app-icon" src="./css/app-agile-square-fill.svg">
-                                <!----></span><span class="title-name">Agile</span>
-                                <!---->
+                                 <span class="prefix-icon">
+											 
+                                 <img class="app-icon" src="./css/app-agile-square-fill.svg">
+                                 </span><span class="title-name">Agile</span>
+                                 
                             </div>
-                            <!---->
+                             
                             <div class="layout-header-content">
-                                <!---->
+                                 
                                 <div class="agile-header-container">
                                     <div class="styx-applet-icon-container">
-                                        <!----><a href="javascript:;" thyiconnavlink="" class="thy-icon-nav-link">
+                                         <a href="javascript:;" thyiconnavlink="" class="thy-icon-nav-link">
                                         <thy-icon thyiconname="applet" class="thy-icon-applet thy-icon">
                                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                                                  fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet"
@@ -372,9 +372,9 @@
                                                 </g>
                                             </svg>
                                         </thy-icon>
-                                        <!---->
+                                         
                                     </a>
-                                        <!---->
+                                         
                                     </div>
                                     <thy-nav class="header-nav thy-nav nav-primary justify-content-center"
                                              thyhorizontal="center" thytype="primary"><a
@@ -387,33 +387,33 @@
                                 </div>
                             </div>
                             <div class="layout-header-operation">
-                                <!---->
+                                 
                             </div>
                         </styx-application-header>
                         <router-outlet></router-outlet>
                         <agile-global-home class="agile-project-list-container thy-layout ">
                             <styx-pilot-entry-list class="thy-layout entry-list">
-                                <!---->
-                                <!---->
+                                 
+                                 
                                 <thy-header styxsecondarynavcontainer="" thysize="sm"
                                             class="thy-layout-header thy-layout-header-sm styx-secondary-nav-container">
                                     <div class="layout-header-title">
-                                        <!---->
-                                        <!---->
-                                        <!---->
-                                        <!---->
-                                        <!---->
-                                        <!---->
-                                        <!----><span class="title-name"></span></div>
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         <span class="title-name"></span></div>
                                     <div class="layout-header-content">
-                                        <!----><span class="text-muted"> 全部项目 </span></div>
+                                         <span class="text-muted"> 全部项目 </span></div>
                                     <div class="layout-header-operation">
-                                        <!---->
+                                         
                                         <thy-nav thytype="thirdly" class="thy-nav nav-thirdly">
-                                            <!----><a class="create-pilot-trigger btn btn-primary btn-md btn-has-icon"
+                                             <a class="create-pilot-trigger btn btn-primary btn-md btn-has-icon"
                                                       thybutton="primary" thyicon="plus-bold"
                                                       thysize="md" id="create_project">
-                                            <!---->
+                                             
                                             <thy-icon class="thy-icon-plus-bold thy-icon">
                                                 <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                                                      fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet"
@@ -424,10 +424,10 @@
                                                     </g>
                                                 </svg>
                                             </thy-icon>
-                                            <!---->新建项目
+                                             新建项目
                                         </a>
-                                            <!----><span class="layout-header-operation-item-has-divide-lg"></span>
-                                            <!----><a href="javascript:;" thynavlink="" class="nav-link">
+                                             <span class="layout-header-operation-item-has-divide-lg"></span>
+                                             <a href="javascript:;" thynavlink="" class="nav-link">
                                             <thy-icon thyiconname="settings" class="thy-icon-settings thy-icon">
                                                 <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                                                      fit="" height="1em" width="1em" preserveAspectRatio="xMidYMid meet"
@@ -444,17 +444,17 @@
                                 </thy-header>
                                 <thy-loading class="thy-loading">
                                     <div>
-                                        <!---->
-                                        <!---->
-                                        <!---->
+                                         
+                                         
+                                         
                                     </div>
                                 </thy-loading>
-                                <!---->
+                                 
                                 <thy-layout class="thy-layout">
                                     <thy-content class="thy-layout thy-layout-content">
-                                        <!---->
+                                         
                                         <styx-pilot-entry-history class="styx-pilot-entry-history">
-                                            <!---->
+                                             
                                             <div class="styx-pilot-entry-history-container"><span
                                                     class="styx-pilot-entry-history-title">最近访问</span>
                                                 <div class="styx-pilot-entry-history-list">
@@ -484,15 +484,15 @@
                                                         <input class="input-search-control ng-untouched ng-pristine ng-valid form-control"
                                                                thyinput="" autocomplete="off"
                                                                placeholder="搜索项目（按Enter搜索）">
-                                                        <!---->
+                                                         
                                                     </thy-input-search>
-                                                    <!---->
-                                                    <!---->
-                                                    <!---->
+                                                     
+                                                     
+                                                     
                                                     <styx-list-filter
                                                             class="styx-list-filter-container cursor-pointer d-inline-flex align-items-center ng-untouched ng-pristine ng-valid"><span
                                                             class="d-inline-block mr-1">类型</span>
-                                                        <!---->
+                                                         
                                                         <thy-icon
                                                                 class="styx-list-filter-icon-down thy-icon-angle-down thy-icon"
                                                                 thyiconname="angle-down">
@@ -509,19 +509,19 @@
                                                                 </g>
                                                             </svg>
                                                         </thy-icon>
-                                                        <!---->
+                                                         
                                                     </styx-list-filter>
-                                                    <!---->
+                                                     
                                                 </div>
                                                 <div class="header-operation">
                                                     <div class="header-operation-section text-muted"> 共 <span
                                                             class="text-body"></span> 个项目
                                                     </div>
                                                     <thy-icon-nav class="header-operation-section thy-icon-nav">
-                                                        <!----><a href="javascript:;" thyiconnavlink=""
+                                                         <a href="javascript:;" thyiconnavlink=""
                                                                   thyiconnavlinkicon="sort" thytooltip="排序"
                                                                   thytooltipoffset="10" class="thy-icon-nav-link">
-                                                        <!---->
+                                                         
                                                         <thy-icon class="thy-icon-sort thy-icon">
                                                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                                                                  fit="" height="1em" width="1em"
@@ -534,16 +534,16 @@
                                                             </svg>
                                                         </thy-icon>
                                                     </a>
-                                                        <!---->
+                                                         
                                                     </thy-icon-nav>
                                                 </div>
                                             </styx-content-main-header>
                                             <styx-content-main-body class="styx-content-main-body">
-                                                <!---->
+                                                 
                                                 <thy-grid thyclassname="table-hover table-fixed" class="thy-grid">
                                                     <table class="table table-default table-hover table-fixed">
                                                         <colgroup>
-                                                            <!---->
+                                                             
                                                             <col width="auto">
                                                             <col width="60px">
                                                             <col width="9.5%">
@@ -551,43 +551,43 @@
                                                             <col width="11%">
                                                             <col width="13%">
                                                         </colgroup>
-                                                        <!---->
+                                                         
                                                         <thead>
                                                         <tr>
-                                                            <!---->
+                                                             
                                                             <th>
-                                                                <!---->
-                                                                <!----> 项目
-                                                                <!---->
+                                                                 
+                                                                  项目
+                                                                 
                                                             </th>
                                                             <th>
-                                                                <!---->
-                                                                <!---->
-                                                                <!---->
+                                                                 
+                                                                 
+                                                                 
                                                             </th>
                                                             <th>
-                                                                <!---->
-                                                                <!----> 标识
-                                                                <!---->
+                                                                 
+                                                                  标识
+                                                                 
                                                             </th>
                                                             <th>
-                                                                <!---->
-                                                                <!----> 成员数
-                                                                <!---->
+                                                                 
+                                                                  成员数
+                                                                 
                                                             </th>
                                                             <th>
-                                                                <!---->
-                                                                <!----> 创建人
-                                                                <!---->
+                                                                 
+                                                                  创建人
+                                                                 
                                                             </th>
                                                             <th>
-                                                                <!---->
-                                                                <!----> 创建时间
-                                                                <!---->
+                                                                 
+                                                                  创建时间
+                                                                 
                                                             </th>
                                                         </tr>
                                                         </thead>
-                                                        <!---->
+                                                         
                                                         <tbody cdkdroplist=""
                                                                class="cdk-drop-list cdk-drop-list-disabled"
                                                                thydragdrop="" id="cdk-drop-list-0">
@@ -595,13 +595,13 @@
                                                     </table>
                                                     <thy-loading class="thy-loading">
                                                         <div>
-                                                            <!---->
-                                                            <!---->
-                                                            <!---->
+                                                             
+                                                             
+                                                             
                                                         </div>
                                                     </thy-loading>
-                                                    <!---->
-                                                    <!---->
+                                                     
+                                                     
                                                 </thy-grid>
                                             </styx-content-main-body>
                                         </thy-content-main>
@@ -618,7 +618,7 @@
             <thy-icon-nav class="shortcut-icon-nav thy-icon-nav-individual thy-icon-nav" thytype="individual"><a
                     href="javascript:;"
                     thyiconnavlink="" thytooltipplacement="bottom" class="thy-icon-nav-link">
-                <!---->
+                 
                 <thy-icon class="thy-icon-outdent thy-icon">
                     <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fit=""
                          height="1em" width="1em" preserveAspectRatio="xMidYMid meet" focusable="false">
@@ -630,12 +630,12 @@
                 </thy-icon>
             </a></thy-icon-nav>
             <div class="shortcut-container">
-                <!---->
+                 
             </div>
-            <!---->
-            <!---->
+             
+             
         </app-shortcut>
-        <!---->
+         
     </app-portal-actual-root>
 </app-portal-root>
 <script src="../js/jquery-3.5.1.min.js" type="text/javascript" ></script>
@@ -643,34 +643,9 @@
 <div class="cdk-overlay-container"></div>
 <script th:inline="javascript" type="application/javascript">
     var basePath = [[${#httpServletRequest.getScheme() + "://" + #httpServletRequest.getServerName() + ":" + #httpServletRequest.getServerPort() + #httpServletRequest.getContextPath()}]];
-    var kaban= "                                                                       <svg viewBox=\"0 0 16 16\"\n" +
-        "                                                                            xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
-        "                                                                            height=\"1em\" width=\"1em\"\n" +
-        "                                                                            preserveAspectRatio=\"xMidYMid meet\"\n" +
-        "                                                                            focusable=\"false\">\n" +
-        "                                                                           <g id=\"kard/kanban-square-fill\"\n" +
-        "                                                                                             stroke-width=\"1\"\n" +
-        "                                                                                             fill-rule=\"evenodd\">\n" +
-        "                                                                               <path d=\"M13.77 8.5c0 .579-.47 1.048-1.05 1.048H9.85A1.048 1.048 0 0 1 8.802 8.5V3.887c0-.578.469-1.048 1.048-1.048h2.87c.58 0 1.05.47 1.05 1.048V8.5zm-6.571 3.57c0 .594-.52 1.075-1.158 1.075H3.388c-.64 0-1.157-.481-1.157-1.074V3.93c0-.593.518-1.074 1.157-1.074H6.04c.639 0 1.158.48 1.158 1.074v8.14zM12.714 0H3.286A3.286 3.286 0 0 0 0 3.286v9.429A3.286 3.286 0 0 0 3.286 16h9.428A3.286 3.286 0 0 0 16 12.715v-9.43A3.286 3.286 0 0 0 12.714 0z\" id=\"kaFill-1\"></path>\n" +
-        "                                                                           </g>\n" +
-        "                                                                       </svg>\n" ;
-    var scrum="                                                                    <svg viewBox=\"0 0 16 16\"\n" +
-        "                                                                         xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
-        "                                                                         height=\"1em\" width=\"1em\"\n" +
-        "                                                                         preserveAspectRatio=\"xMidYMid meet\"\n" +
-        "                                                                         focusable=\"false\">\n" +
-        "                                                                        <g id=\"omrd/scrum-fill\"\n" +
-        "                                                                           stroke-width=\"1\"\n" +
-        "                                                                           fill-rule=\"evenodd\">\n" +
-        "                                                                            <path\n" +
-        "                                                                                    d=\"M13.899 12.004l-1.136 1.114a.394.394 0 0 1-.559-.006l-.012-.012a.396.396 0 0 1 .005-.559l.397-.39H9.841l-.18-.001a4.17 4.17 0 0 0 1.459-.923H12.557l-.388-.396a.394.394 0 0 1 .005-.558l.013-.013a.395.395 0 0 1 .559.006l1.143 1.165.002.002.013.012a.396.396 0 0 1-.005.559m-5.73.146H2.461a.478.478 0 0 1-.479-.478c0-.288.233-.522.521-.522h3.023C4.655 10.4 4.09 9.304 4.09 8.067c0-1.053.401-2.054 1.128-2.818a.501.501 0 0 1 .725.69 3.072 3.072 0 0 0-.853 2.128 3.086 3.086 0 0 0 3.079 3.083h.004c1.7 0 3.082-1.382 3.082-3.083 0-1.7-1.382-3.083-3.082-3.083-.061 0-.122.016-.183.02l.448.482c.149.16.14.41-.02.558l-.014.013a.396.396 0 0 1-.558-.021L6.594 4.689a.396.396 0 0 1 .021-.559l.013-.012.002-.002 1.337-1.241c.16-.148.41-.14.558.021l.013.013a.396.396 0 0 1-.021.558l-.584.543c.08-.005.159-.026.24-.026a4.088 4.088 0 0 1 4.082 4.083 4.087 4.087 0 0 1-4.082 4.083h-.004M13.076 0H2.923A2.924 2.924 0 0 0 0 2.924v10.152A2.922 2.922 0 0 0 2.923 16h10.153A2.924 2.924 0 0 0 16 13.076V2.924A2.925 2.925 0 0 0 13.076 0\"\n" +
-        "                                                                                    id=\"omFill-1\">\n" +
-        "                                                                            </path>\n" +
-        "                                                                        </g>\n" +
-        "                                                                    </svg>";
     $(document).ready(function (){
         $.ajax({
-            url:basePath+"/project/projectList",
+            url:basePath+"/projectList",
             cache:false,
             async:false,
             type:"POST",
@@ -679,12 +654,12 @@
                     $(".text-body").append(result.items.length);
                     var tr;
                     for(var i=0;i<result.items.length;i++){
-                        tr+="<tr cdkdrag=\""+result.items[i].id+"\"\n" +
-                            "                                                            class=\"thy-sortable-item cdk-drag thy-grid-item-hover-display-operation cdk-drag-disabled\">\n" +
+                        tr+="<tr browseid=\""+result.items[i].id+"\"\n" +
+                            "                                                            class=\"thy-sortable-item cdk-drag thy-grid-item-hover-display-operation cdk-drag-disabled\" onclick=\"detail(this)\">\n" +
                             "                                                            <td>\n" +
                             "                                                                <span class=\"icon-text icon-text-sm text-truncate d-block\">\n" +
                             "                                                                    <thy-icon class=\"thy-icon-scrum-fill thy-icon\" style=\"color: rgb(52, 143, 228);\">\n" ;
-                        tr+=result.items.template_type==="scrum"?scrum:kaban;
+                        tr+=result.items.template_type==="Scrum"?kaban:scrum;
                         tr+= "                                                                    </thy-icon>\n" +
                             "                                                                    <span>"+result.items[i].name+"</span>\n" +
                             "                                                                </span>\n" +
@@ -731,7 +706,7 @@
     });
     $(document).ready(function () {
         $.ajax({
-            url: basePath + "/project/recentProjectList",
+            url: basePath + "/recentProjectList",
             cache: false,
             async: false,
             type: "POST",
@@ -739,27 +714,24 @@
                 if(result.retCode=="000000"){
                     var div_card="";
                     for(var i=0;i<result.items.length;i++){
-                        div_card+= "<form>" +
-                            "<div class=\"entry-history-item\" style=\"border-left-color: rgb(52, 143, 228); background-color: rgba(52, 143, 228, 0.05);\" browseId=\""+result.items[i].id+"\" onclick=\"detail(this)\">\n" +
+                        div_card+= "<div class=\"entry-history-item\" style=\"border-left-color: rgb(52, 143, 228); background-color: rgba(52, 143, 228, 0.05);\" browseId=\""+result.items[i].id+"\" onclick=\"detail(this)\">\n" +
                             "                                                        <div class=\"item-title icon-text icon-text-lg text-truncate\">\n" +
                             "                                                            <thy-icon class=\"thy-icon-scrum-fill thy-icon\"\n" +
                             "                                                                      style=\"color: rgb(52, 143, 228);\">\n" ;
-                        div_card+=result.items[i].template_type==="scrum"?scrum:kaban;
+                        div_card+=result.items[i].template_type==="Scrum"?scrum:kaban;
                         div_card+= "                                                            </thy-icon>\n" +
                             "                                                            <span class=\"font-size-md pl-1\"><span>"+result.items[i].name+"</span></span>\n" +
-                            "                                                            <!---->\n" +
+                            "                                                             \n" +
                             "                                                        </div>\n" +
                             "                                                        <div class=\"item-creator text-truncate\"> "+result.items[i].member.nickName+"・"+result.items[i].time+"</div>\n" +
-                            "                                                    </div>\n" +
-                            "                                                  </form>";
+                            "                                                    </div>\n" ;
                     }
                     $(".styx-pilot-entry-history-list").html(div_card);
-                    console.log(div_card)
                 }
             }
         });
     });
-    function m1 () {
+    function m1 (u) {
         var project_card="  <div class=\"cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing\" onclick=\"clean('cdk-overlay-container','class')\"></div>\n" +
             "    <div class=\"cdk-global-overlay-wrapper\" dir=\"ltr\" style=\"justify-content: center; align-items: center;\">\n" +
             "        <div id=\"cdk-overlay-2\" class=\"cdk-overlay-pane agile dialog-overlay-pane dialog-max-lg\" style=\"pointer-events: auto; position: static;\">\n" +
@@ -803,7 +775,7 @@
             "                                                        </div>\n" +
             "                                                    </div>\n" +
             "                                                    <span class=\"input-label input-label-\"></span>\n" +
-            "                                                    <input thyinput=\"\" autocomplete=\"off\" type=\"undefined\" placeholder=\"输入项目名称（不超过32字符）\" class=\"ng-pristine ng-valid form-control ng-touched\">\n" +
+            "                                                    <input thyinput=\"\" autocomplete=\"off\" name=\"title\" type=\"undefined\" placeholder=\"输入项目名称（不超过32字符）\" class=\"ng-pristine ng-valid form-control ng-touched\">\n" +
             "\n" +
             "                                                </thy-input>\n" +
             "                                            </styx-pilot-input-name>\n" +
@@ -827,7 +799,7 @@
             "                                                <thy-input name=\"styx-input-identifier\" thyinput=\"\" autocomplete=\"off\" class=\"form-control thy-input ng-untouched ng-pristine ng-invalid\"\n" +
             "                                                           required=\"\" maxlength=\"10\" pattern=\"^[A-Z0-9_-]{0,9}[A-Z]$\">\n" +
             "                                                    <span class=\"input-label input-label-\"></span><input thyinput=\"\" autocomplete=\"off\" type=\"undefined\"\n" +
-            "                                                                                                                placeholder=\"大写字母和数字，末位不能为数字，10字符以内\" class=\"ng-untouched ng-pristine ng-valid form-control\">\n" +
+            "                                                                                                                placeholder=\"大写字母和数字，末位不能为数字，10字符以内\" class=\"ng-untouched ng-pristine ng-valid form-control\" name=\"logo\">\n" +
             "                                                    <div class=\"input-append ng-star-inserted\">\n" +
             "                                                        <a class=\"link-secondary ng-star-inserted\" href=\"javascript:;\">\n" +
             "                                                        <thy-icon class=\"font-size-base thy-icon-question-circle thy-icon\" thyiconname=\"question-circle\"><svg\n" +
@@ -859,14 +831,25 @@
             "                                            <styx-member-list class=\"styx-create-form-members styx-member-list styx-member-list--has-cursor ng-untouched ng-pristine ng-valid\"\n" +
             "                                                              name=\"members\" styxsize=\"sm\" style=\"\">\n" +
             "                                                <ul class=\"styx-member-list-container clearfix has-member-card\">\n" +
-            "                                                    <li class=\"ng-star-inserted\" style=\"\">\n" +
+            "                                                    <li class=\"ng-star-inserted\" style=\"\" alt=\""+user.cusId+"\">\n" +
             "                                                        <thy-avatar class=\"thy-avatar-32 thy-avatar\">\n" +
             "                                                            <span class=\"avatar-default ng-star-inserted\" style=\"background-color:"+user.color+";\">\n" +
             "                              <div>"+user.nickName+"</div>\n" +
             "                            </span>\n" +
             "                                                        </thy-avatar>\n" +
-            "                                                    </li>\n" +
-            "                                                    <li class=\"ng-star-inserted\" onclick=\"m2()\">\n" +
+            "                                                    </li>\n" ;
+        if(u!=undefined){
+            for(var i in u){
+                project_card+=  "                                                    <li class=\"ng-star-inserted\" style=\"\" alt=\""+u[i].cusId+"\">\n" +
+                    "                                                        <thy-avatar class=\"thy-avatar-32 thy-avatar\">\n" +
+                    "                                                            <span class=\"avatar-default ng-star-inserted\" style=\"background-color:"+u[i].color+";\">\n" +
+                    "                              <div>"+u[i].nickName+"</div>\n" +
+                    "                            </span>\n" +
+                    "                                                        </thy-avatar>\n" +
+                    "                                                    </li>\n" ;
+            }
+        }
+        project_card+="                                                    <li class=\"ng-star-inserted\" onclick=\"m2("+u+")\">\n" +
             "                                                        <a href=\"javascript:;\"  thyshape=\"circle-dashed\" thysize=\"sm\" class=\"btn-icon-sm btn-icon-circle circle-dashed btn btn-icon ng-star-inserted\">\n" +
             "                                                        <thy-icon class=\"thy-icon-user-add thy-icon ng-star-inserted\"><svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"\n" +
             "                                                                                                                           fit=\"\" height=\"1em\" width=\"1em\" preserveAspectRatio=\"xMidYMid meet\" focusable=\"false\">\n" +
@@ -888,7 +871,7 @@
             "                                           style=\"\">\n" +
             "                            <div class=\"dialog-footer-actions btn-pair\">\n" +
             "                                <button thybutton=\"link-secondary\" class=\"btn btn-link btn-link-primary-weak\" onclick=\"clean('cdk-overlay-container','class')\">取消</button>\n" +
-            "                                <button thybutton=\"primary\" class=\"btn btn-primary\">确定 </button>\n" +
+            "                                <button thybutton=\"primary\" class=\"btn btn-primary\" onclick=\"submit()\">确定 </button>\n" +
             "                            </div>\n" +
             "                            <div class=\"dialog-footer-description ng-star-inserted\">\n" +
             "                                <styx-feedback class=\"ng-star-inserted\">\n" +
@@ -906,7 +889,7 @@
             "                                </a></styx-feedback>\n" +
             "                            </div>\n" +
             "                        </thy-dialog-footer>\n" +
-            "                        <!---->\n" +
+            "                         \n" +
             "                    </styx-create-pilot-item>\n" +
             "                </agile-project-add-edit>\n" +
             "            </thy-dialog-container>\n" +
@@ -919,7 +902,8 @@
     $("#create_project").click(function (){
         m1();
     });
-    function m2() {
+    var userList;
+    function m2(list) {
         $.ajax({
             url:basePath+"/userList",
             dataType:"json",
@@ -928,6 +912,7 @@
             type: "POST",
             success:function (result) {
                 if(result.retCode=="000000"){
+                    userList=result.items;
                     clean("cdk-overlay-container","class");
                     var template="   <div class=\"cdk-overlay-backdrop cdk-overlay-dark-backdrop cdk-overlay-backdrop-showing\" onclick=\"clean('cdk-overlay-container','class')\"></div>\n" +
                         "   <div class=\"cdk-global-overlay-wrapper\" dir=\"ltr\" style=\"justify-content: center; align-items: center;\">\n" +
@@ -940,8 +925,8 @@
                         "        <styx-member-select-dialog class=\"thy-dialog-content styx-member-select-dialog-next ng-star-inserted\" style=\"\">\n" +
                         "         <thy-dialog-header class=\"dialog-header\">\n" +
                         "          <template class=\"ng-star-inserted\"></template>\n" +
-                        "          <h3 class=\"modal-title ng-star-inserted\"> 选择成员 </h3>\n" +
-                        "          <button class=\"close ng-star-inserted\" type=\"button\">\n" +
+                        "          <h3 class=\"modal-title ng-star-inserted\"> 添加成员 </h3>\n" +
+                        "          <button class=\"close ng-star-inserted\" type=\"button\" onclick=\"clean('cdk-overlay-container','class')\">\n" +
                         "           <thy-icon thyiconname=\"close\" class=\"thy-icon-close thy-icon\">\n" +
                         "            <svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"\n" +
                         "             fit=\"\" height=\"1em\" width=\"1em\" preserveAspectRatio=\"xMidYMid meet\" focusable=\"false\">\n" +
@@ -973,19 +958,6 @@
                         "             </div>\n" +
                         "            </div>\n" +
                         "            <member-select-list class=\"styx-member-select-body styx-member-select-list ng-star-inserted\">\n" +
-                        "             <div class=\"styx-member-select-search\">\n" +
-                        "              <thy-input-search name=\"search\" class=\"input-search-container ng-pristine ng-valid ng-touched\">\n" +
-                        "               <thy-icon class=\"input-prefix-icon thy-icon-search thy-icon\" thyiconname=\"search\"><svg viewBox=\"0 0 16 16\"\n" +
-                        "                 xmlns=\"http://www.w3.org/2000/svg\" fit=\"\" height=\"1em\" width=\"1em\" preserveAspectRatio=\"xMidYMid meet\"\n" +
-                        "                 focusable=\"false\">\n" +
-                        "                 <g id=\"oonormal/search\" stroke-width=\"1\" fill-rule=\"evenodd\">\n" +
-                        "                  <path d=\"M6.751 12.303A5.557 5.557 0 0 1 1.2 6.751C1.2 3.691 3.69 1.2 6.751 1.2a5.558 5.558 0 0 1 5.551 5.551 5.557 5.557 0 0 1-5.551 5.552M6.751 0a6.751 6.751 0 1 0 4.309 11.949l3.855 3.855a.6.6 0 1 0 .849-.849l-3.854-3.853A6.751 6.751 0 0 0 6.751 0\"\n" +
-                        "                   id=\"ooFill-1\"></path>\n" +
-                        "                 </g>\n" +
-                        "                </svg></thy-icon><input class=\"input-search-control ng-pristine ng-valid form-control ng-touched\" thyinput=\"\"\n" +
-                        "                autocomplete=\"off\" placeholder=\"搜索成员\">\n" +
-                        "              </thy-input-search>\n" +
-                        "             </div>\n" +
                         "             <div class=\"styx-member-select-list styx-member-select-list-not-show-groups\">\n" +
                         "              <thy-loading class=\"thy-loading\">\n" +
                         "               <div>\n" +
@@ -993,22 +965,15 @@
                         "              </thy-loading>\n" +
                         "              <thy-selection-list class=\"thy-list thy-selection-list thy-multiple-selection-list ng-untouched ng-pristine ng-valid ng-star-inserted\">";
                     for(var i=0;i<result.items.length;i++){
-                        if(result.items[i].cusId==user.cusId){
-                            template+="<li class=\"styx-member-select-list-item thy-list-option disabled ng-star-inserted active\" thy-list-option=\"\"\n" +
-                                "                role=\"option\" tabindex=\"-1\">\n" +
-                                "                \n" +
+                        if(result.items[i].cusId!=user.cusId){
+                            template+="<li class=\"styx-member-select-list-item thy-list-option ng-star-inserted\" thy-list-option=\"\"\n" +
+                                "                role=\"option\" tabindex=\"-1\" tr=\""+result.items[i].cusId+"\" onclick=\"addPeople(this,'"+result.items[i].cusId+"')\">\n" +
                                 "                <thy-avatar thysize=\"xs\" class=\"thy-avatar-24 thy-avatar ng-star-inserted\">\n" +
                                 "                 <span class=\"avatar-default ng-star-inserted\" style=\"background-color: "+result.items[i].color+";\">\n" +
-                                "                  <div>"+result.items[i].   nickName+"</div>\n" +
+                                "                  <div>"+result.items[i].nickName+"</div>\n" +
                                 "                 </span>\n" +
-                                "                \n" +
-                                "                 <div class=\"avatar-name ng-star-inserted\">"+result.items[i].   nickName+"</div>\n" +
-                                "\n" +
+                                "                 <div class=\"avatar-name ng-star-inserted\">"+result.items[i].nickName+"</div>\n" +
                                 "                </thy-avatar>\n" +
-                                "                <span class=\"styx-member-select-list-item-label thy-label thy-label-default thy-label--sm ng-star-inserted\"\n" +
-                                "                 thylabel=\"default\" thysize=\"sm\">\n" +
-                                "                 我自己\n" +
-                                "                </span>\n" +
                                 "                <span class=\"checked-icon ng-star-inserted\">\n" +
                                 "                 <thy-icon thyiconname=\"check\" class=\"thy-icon-check thy-icon\">\n" +
                                 "                  <svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"\n" +
@@ -1019,19 +984,15 @@
                                 "                  </svg>\n" +
                                 "                 </thy-icon>\n" +
                                 "                </span>\n" +
-                                "               \n" +
                                 "               </li>";
                         }else {
                             template+="<li class=\"styx-member-select-list-item thy-list-option disabled ng-star-inserted active\" thy-list-option=\"\"\n" +
-                                "                role=\"option\" tabindex=\"-1\">\n" +
-                                "                \n" +
+                                "                role=\"option\" tabindex=\"-1\" tr=\""+result.items[i].cusId+"\">\n" +
                                 "                <thy-avatar thysize=\"xs\" class=\"thy-avatar-24 thy-avatar ng-star-inserted\">\n" +
                                 "                 <span class=\"avatar-default ng-star-inserted\" style=\"background-color: "+result.items[i].color+";\">\n" +
-                                "                  <div>"+result.items[i].   nickName+"</div>\n" +
+                                "                  <div>"+result.items[i].nickName+"</div>\n" +
                                 "                 </span>\n" +
-                                "                \n" +
-                                "                 <div class=\"avatar-name ng-star-inserted\">"+result.items[i].   nickName+"</div>\n" +
-                                "\n" +
+                                "                 <div class=\"avatar-name ng-star-inserted\">"+result.items[i].nickName+"</div>\n" +
                                 "                </thy-avatar>\n" +
                                 "                <span class=\"styx-member-select-list-item-label thy-label thy-label-default thy-label--sm ng-star-inserted\"\n" +
                                 "                 thylabel=\"default\" thysize=\"sm\">\n" +
@@ -1039,48 +1000,30 @@
                                 "                </span>\n" +
                                 "                <span class=\"checked-icon ng-star-inserted\">\n" +
                                 "                </span>\n" +
-                                "               \n" +
                                 "               </li>";
                         }
 
                     }
                     template+="              </thy-selection-list>\n" +
                         "             </div>\n" +
-                        "             <!---->\n" +
+                        "              \n" +
                         "            </member-select-list>\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
                         "           </styx-member-select>\n" +
                         "          </div>\n" +
                         "          <div class=\"styx-member-select-body-selected\">\n" +
-                        "           <div class=\"text-muted styx-member-select-body-selected-number\">已选择（0）</div>\n" +
+                        "           <div class=\"text-muted styx-member-select-body-selected-number\">已选择（<span class=\"total\">0</span>）</div>\n" +
                         "           <div class=\"styx-member-select-body-selected-members\">\n" +
-                        "            <thy-list class=\"thy-list\">\n" +
-                        "             <!---->\n" +
-                        "             <!---->\n" +
-                        "             <!---->\n" +
-                        "             <!---->\n" +
+                        "            <thy-list class=\"thy-list add-member-list\">\n" +
                         "            </thy-list>\n" +
                         "           </div>\n" +
                         "          </div>\n" +
                         "         </thy-dialog-body>\n" +
                         "         <thy-dialog-footer class=\"dialog-footer dialog-footer-actions-align-right dialog-footer-border-top\">\n" +
                         "          <div class=\"dialog-footer-actions btn-pair\">\n" +
-                        "           <!---->\n" +
-                        "           <!----><button thybutton=\"link-secondary\" class=\"btn btn-link btn-link-primary-weak ng-star-inserted\" onclick=\"m1()\">\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
-                        "            <!----> 返回 </button><button thybutton=\"primary\" class=\"btn btn-primary ng-star-inserted\">\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
-                        "            <!---->\n" +
-                        "            <!---->确认</button>\n" +
-                        "           <!---->\n" +
-                        "           <!---->\n" +
+                        "           <button thybutton=\"link-secondary\" class=\"btn btn-link btn-link-primary-weak ng-star-inserted\" onclick=\"m1()\">\n" +
+                        "              返回 </button><button thybutton=\"primary\" class=\"btn btn-primary ng-star-inserted\" onclick=\"confirm()\">\n" +
+                       "             确认</button>\n" +
                         "          </div>\n" +
-                        "          <!---->\n" +
                         "         </thy-dialog-footer>\n" +
                         "        </styx-member-select-dialog>\n" +
                         "       </styx-create-pilot-item>\n" +
@@ -1090,36 +1033,123 @@
                         "    </div>\n" +
                         "   </div>";
                     $(".cdk-overlay-container").html(template);
+                    $(".styx-member-select-list-item").each(function () {
+                       for(var j in list){
+                           if($(this).attr("tr")===list[j].cusId){
+                               $(this).addClass("active");
+                           }
+                       }
+                    });
                 }
             }
 
         });
     }
-    //跳转到相应的项目详情页面
-    function detail(item){
-        var form = document.createElement("form");
-        form.action = "/project/itemList/backLog";
-        form.method = "post";
-        form.style.dispaly = "none";
-        //添加参数
-        var a = [{
-            name: "browseId",
-            value: $(item).attr("browseid")
-        },{
-            name: "pageSize",
-            value:50
-        },{
-            name: "pageNo",
-            value:1
-        }];
-        for(var i in a){
-            var opt = document.createElement("input");
-            opt.name = a[i].name;
-            opt.value = a[i].value;
-            form.appendChild(opt);
+
+    var len="&nbsp";
+    function addPeople(item,id) {
+        console.log("len:"+len);
+        var reg = RegExp(id);
+        console.log("test:"+reg.test(len));
+        if(!reg.test(len)){
+            $(item).addClass("active");
+            var number=parseInt($(".total").text())+1;
+            $(".total").text(number);
+            var member;
+            for(var i=0;i<userList.length;i++){
+                if(id===userList[i].cusId){
+                    member=userList[i];
+                    break;
+                }
+            }
+            var card="<div class=\"thy-list-item ng-star-inserted\" atl=\""+member.cusId+"\">\n" +
+                " <thy-avatar class=\"selected-member thy-avatar-24 thy-avatar ng-star-inserted\" thysize=\"xs\">\n" +
+                "  <span class=\"avatar-default ng-star-inserted\" style=\"background-color: "+member.color+";\">\n" +
+                "   <div>"+member.nickName+"</div>\n" +
+                "  </span>\n" +
+                "  <div class=\"avatar-name ng-star-inserted\">"+member.nickName+"</div>\n" +
+                " </thy-avatar>\n" +
+                " <a class=\"link-secondary remove-icon\" href=\"javascript:decreate('this','"+member.cusId+"');\">\n" +
+                "  <thy-icon class=\"link-danger-weak thy-icon-close thy-icon\" thyiconname=\"close\"><svg viewBox=\"0 0 16 16\" xmlns=\"http://www.w3.org/2000/svg\"\n" +
+                "    fit=\"\" height=\"1em\" width=\"1em\" preserveAspectRatio=\"xMidYMid meet\" focusable=\"false\">\n" +
+                "    <g id=\"fdaction/close\" stroke-width=\"1\" fill-rule=\"evenodd\">\n" +
+                "     <path d=\"M7.456 7.456V-.115h1.2v7.571h7.572v1.2H8.656v7.572h-1.2V8.656H-.115v-1.2h7.571z\" id=\"fd形状结合\" transform=\"rotate(45 8.056 8.056)\"></path>\n" +
+                "    </g>\n" +
+                "   </svg></thy-icon>\n" +
+                " </a>\n" +
+                "</div>";
+            $(".add-member-list").append(card);
+            if(len==="&nbsp"){
+                len=id;
+            }else {
+                len=len+","+id;
+            }
+        }else {
+            decreate(item,id);
         }
-        document.body.appendChild(form);
-        form.submit();
+    }
+    function decreate(item,id) {
+        var arr=new Array();
+        arr = len.split(",");
+        console.log()
+        len="";
+        for(var i in arr){
+            if(arr[i]!==id){
+                len=len+arr[i]+",";
+            }
+        }
+        $(".styx-member-select-list-item").each(function () {
+            if($(this).attr("tr")===id){
+                $(this).removeClass("active");
+            }
+        });
+        var number=parseInt($(".total").text())-1;
+        $(".total").text(number);
+       $(".add-member-list").children().each(function () {
+           if($(this).attr("atl")===id){
+               $(this).empty();
+               $(this).remove();
+           }
+       })
+    }
+    function confirm() {
+        var u=new Array();
+        var i=0;
+        $(".add-member-list").children().each(function () {
+            for(var j in userList){
+                if(userList[j].cusId===$(this).attr("atl")){
+                    u[i]=userList[j];
+                }
+            }
+           i++;
+        })
+        m1(u);
+    }
+    function submit(){
+        var $title=$("input[name='title']").val();
+        var $type=$("input[name='type']:checked").next("span").text();
+        var $logo=$("input[name='logo']").val();
+        var $description=$("textarea[name='description']").val();
+        var $participant="";
+        $(".has-member-card").children().each(function () {
+            if($(this).attr("alt")!=undefined){
+                $participant=$participant+$(this).attr("alt")+",";
+            }
+        });
+        $.ajax({
+            url:basePath+"/addProject",
+            dataType: "json",
+            type:"POST",
+            data:{"name":$title,"logo":$logo,"description":$description,"type":$type,"team":$participant},
+            async:false,
+            cache:false,
+            success:function (result) {
+                if(result.retCode==="000000"){
+                   window.alert("添加成功");
+                    window.location.reload();
+                }
+            }
+        });
     }
 </script>
 </body>

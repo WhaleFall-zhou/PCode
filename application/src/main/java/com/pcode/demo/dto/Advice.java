@@ -7,8 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDictionaryInfo {
-    private String fieldId;
-    private String  fieldName;
-    private Integer fieldType;
+public class Advice<T,C> {
+    private T operator;
+    private  C organization;
+    private String time;
+    private String operation;
+    private String other;
 }

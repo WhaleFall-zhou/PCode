@@ -2,6 +2,7 @@ package com.pcode.demo.dao;
 
 import com.pcode.demo.dto.CusServiceInfo;
 import com.pcode.demo.dto.CustomerVo;
+import com.pcode.demo.dto.ItemInfo;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

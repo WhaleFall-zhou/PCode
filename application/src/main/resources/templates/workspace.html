@@ -261,10 +261,10 @@
                                 </span>
                             </a>
                         </li>
-                        <li thytooltip="通知" thytooltipplacement="right">
+                        <li thytooltip="通知" thytooltipplacement="right" onclick="oppenAdvice(this)">
                             <a class="app-item" href="javascript:;">
                                 <span class="item-icon">
-                                    <thy-badge class="icon-badge thy-badge-container">
+                                    <thy-badge class="icon-badge thy-badge-container advice">
                                         <thy-icon thyiconname="bell" class="thy-icon-bell thy-icon">
                                             <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"
                                                  fit="" height="1em" width="1em"
@@ -945,7 +945,7 @@
 
     $(document).ready(function (){
         $.ajax({
-            url:basePath+"/project/recentProjectList",
+            url:basePath+"/recentProjectList",
             cache:false,
             async:false,
             type:"POST",
@@ -953,37 +953,12 @@
                 if(result.retCode=="000000"){
                     $("#projectCount").append(result.items.length);
                     var tr;
-                    var kaban= "                                                                       <svg viewBox=\"0 0 16 16\"\n" +
-                        "                                                                            xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
-                        "                                                                            height=\"1em\" width=\"1em\"\n" +
-                        "                                                                            preserveAspectRatio=\"xMidYMid meet\"\n" +
-                        "                                                                            focusable=\"false\">\n" +
-                        "                                                                           <g id=\"kard/kanban-square-fill\"\n" +
-                        "                                                                                             stroke-width=\"1\"\n" +
-                        "                                                                                             fill-rule=\"evenodd\">\n" +
-                        "                                                                               <path d=\"M13.77 8.5c0 .579-.47 1.048-1.05 1.048H9.85A1.048 1.048 0 0 1 8.802 8.5V3.887c0-.578.469-1.048 1.048-1.048h2.87c.58 0 1.05.47 1.05 1.048V8.5zm-6.571 3.57c0 .594-.52 1.075-1.158 1.075H3.388c-.64 0-1.157-.481-1.157-1.074V3.93c0-.593.518-1.074 1.157-1.074H6.04c.639 0 1.158.48 1.158 1.074v8.14zM12.714 0H3.286A3.286 3.286 0 0 0 0 3.286v9.429A3.286 3.286 0 0 0 3.286 16h9.428A3.286 3.286 0 0 0 16 12.715v-9.43A3.286 3.286 0 0 0 12.714 0z\" id=\"kaFill-1\"></path>\n" +
-                        "                                                                           </g>\n" +
-                        "                                                                       </svg>\n" ;
-                    var scrum="                                                                    <svg viewBox=\"0 0 16 16\"\n" +
-                        "                                                                         xmlns=\"http://www.w3.org/2000/svg\" fit=\"\"\n" +
-                        "                                                                         height=\"1em\" width=\"1em\"\n" +
-                        "                                                                         preserveAspectRatio=\"xMidYMid meet\"\n" +
-                        "                                                                         focusable=\"false\">\n" +
-                        "                                                                        <g id=\"omrd/scrum-fill\"\n" +
-                        "                                                                           stroke-width=\"1\"\n" +
-                        "                                                                           fill-rule=\"evenodd\">\n" +
-                        "                                                                            <path\n" +
-                        "                                                                                    d=\"M13.899 12.004l-1.136 1.114a.394.394 0 0 1-.559-.006l-.012-.012a.396.396 0 0 1 .005-.559l.397-.39H9.841l-.18-.001a4.17 4.17 0 0 0 1.459-.923H12.557l-.388-.396a.394.394 0 0 1 .005-.558l.013-.013a.395.395 0 0 1 .559.006l1.143 1.165.002.002.013.012a.396.396 0 0 1-.005.559m-5.73.146H2.461a.478.478 0 0 1-.479-.478c0-.288.233-.522.521-.522h3.023C4.655 10.4 4.09 9.304 4.09 8.067c0-1.053.401-2.054 1.128-2.818a.501.501 0 0 1 .725.69 3.072 3.072 0 0 0-.853 2.128 3.086 3.086 0 0 0 3.079 3.083h.004c1.7 0 3.082-1.382 3.082-3.083 0-1.7-1.382-3.083-3.082-3.083-.061 0-.122.016-.183.02l.448.482c.149.16.14.41-.02.558l-.014.013a.396.396 0 0 1-.558-.021L6.594 4.689a.396.396 0 0 1 .021-.559l.013-.012.002-.002 1.337-1.241c.16-.148.41-.14.558.021l.013.013a.396.396 0 0 1-.021.558l-.584.543c.08-.005.159-.026.24-.026a4.088 4.088 0 0 1 4.082 4.083 4.087 4.087 0 0 1-4.082 4.083h-.004M13.076 0H2.923A2.924 2.924 0 0 0 0 2.924v10.152A2.922 2.922 0 0 0 2.923 16h10.153A2.924 2.924 0 0 0 16 13.076V2.924A2.925 2.925 0 0 0 13.076 0\"\n" +
-                        "                                                                                    id=\"omFill-1\">\n" +
-                        "                                                                            </path>\n" +
-                        "                                                                        </g>\n" +
-                        "                                                                    </svg>";
                     for(var i=0;i<result.items.length;i++){
-                        tr+=" <tr cdkdrag=\""+result.items[i].id+"\" class=\"thy-sortable-item cdk-drag cdk-drag-disabled\">\n" +
+                        tr+=" <tr browseid=\""+result.items[i].id+"\" class=\"thy-sortable-item cdk-drag cdk-drag-disabled\" onclick=\"detail(this)\">\n" +
                             "                                                            <td class=\"text-truncate\">\n" +
                             "                                                               <span class=\"icon-text icon-text-sm text-truncate d-block\">\n" +
                             "                                                                   <thy-icon class=\"thy-icon-kanban-square-fill thy-icon\" style=\"color: rgb(86, 171, 251);\">\n";
-                          tr+=result.items[i].template_type==="scrum"?scrum:kaban;
+                          tr+=result.items[i].template_type==="Scrum"?scrum:kaban;
                           tr+="                                                                   </thy-icon>\n" +
                             "                                                                   <span>"+result.items[i].name+"</span>\n" +
                             "                                                               </span>\n" +

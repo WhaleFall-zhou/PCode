@@ -7,6 +7,7 @@ import com.pcode.demo.util.JsonResponseUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -94,6 +95,31 @@ public class UserController {
             generalDto= userService.remove(cusIds, departId);
         }catch (Exception e){
             log.error("initUser:{}",e);
+            generalDto.setRetCode("9999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
+    @RequestMapping(value = "/advice",method =RequestMethod.POST)
+    public void advice(HttpServletRequest request,HttpServletResponse response){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= userService.advice();
+        }catch (Exception e){
+            log.error("advice error :{}",e);
+            generalDto.setRetCode("9999999");
+            generalDto.setRetMsg("操作失败");
+        }
+        JsonResponseUtil.write(response,generalDto);
+    }
+    //用户每次查看通知所发送的请求，count为查看通知的新条数
+    @RequestMapping(value = "/Viewed",method =RequestMethod.POST)
+    public void viewed(HttpServletRequest request, HttpServletResponse response, Integer count){
+        GeneralDto<Object> generalDto = new GeneralDto<>();
+        try {
+            generalDto= userService.viewed(count);
+        }catch (Exception e){
+            log.error("viewed error :{}",e);
             generalDto.setRetCode("9999999");
             generalDto.setRetMsg("操作失败");
         }

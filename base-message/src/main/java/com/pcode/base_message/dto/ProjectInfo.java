@@ -1,4 +1,4 @@
-package com.pcode.demo.dto;
+package com.pcode.base_message.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
